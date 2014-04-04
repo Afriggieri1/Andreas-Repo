@@ -10,15 +10,11 @@ package testproject;
  *
  * @author Andreas
  */
-public class TestProject {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World");
-        
-        Test.Fibonacci(5);
+public class Test {
+    public static int Fibonacci(int num){
+        if ((num==0)||(num==1)){
+            return 1;
+        }
+        else return Fibonacci(num-1)+Fibonacci(num-2);
     }
-    
 }
