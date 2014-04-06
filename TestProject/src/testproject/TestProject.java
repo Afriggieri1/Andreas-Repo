@@ -23,6 +23,12 @@ public class TestProject {
     
     public static void AddTest(){
         assertEquals(Test.Fibonacci(5),8);
+        try{
+            assertEquals(Test.Fact(5),110);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
     
 }
