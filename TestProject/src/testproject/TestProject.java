@@ -5,7 +5,7 @@
  */
 
 package testproject;
-
+import static org.junit.Assert.*;
 /**
  *
  * @author Andreas
@@ -16,9 +16,13 @@ public class TestProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        System.out.println("Hello World Test");
         
-        Test.Fibonacci(5);
+        AddTest();
+    }
+    
+    public static void AddTest(){
+        assertEquals(Test.Fibonacci(5),8);
     }
     
 }
