@@ -27,4 +27,8 @@ public class Test {
             return num * Fact(num - 1);
         }
     }
+     
+     public static int multiply(int a, int b){
+         return a*b;
+     }
 }
