@@ -45,7 +45,7 @@ public class TestTest {
     public void testFibonacci() {
         System.out.println("Fibonacci");
         int num = 5;
-        int expResult = 7;
+        int expResult = 8;
         int result = testproject.Test.Fibonacci(num);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

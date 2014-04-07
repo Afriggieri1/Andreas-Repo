@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="1" hostname="Andreas-Laptop" name="testproject.TestTest" skipped="0" tests="4" time="0.115" timestamp="2014-04-07T10:43:59">
+<testsuite errors="0" failures="0" hostname="Andreas-Laptop" name="testproject.TestTest" skipped="0" tests="4" time="0.119" timestamp="2014-04-07T10:46:14">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="GB" />
@@ -61,7 +61,7 @@
     <property name="copylibs.rebase" value="true" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testproject.TestTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Andreas\Andreas-Repo\TestProject\build\test\results\TEST-testproject.TestTest.xml crashfile=C:\Users\Andreas\Andreas-Repo\TestProject\build\junitvmwatcher3550206711711143926.properties propsfile=C:\Users\Andreas\Andreas-Repo\TestProject\build\junit2926103375870846431.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testproject.TestTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Andreas\Andreas-Repo\TestProject\build\test\results\TEST-testproject.TestTest.xml crashfile=C:\Users\Andreas\Andreas-Repo\TestProject\build\junitvmwatcher1653374094755322676.properties propsfile=C:\Users\Andreas\Andreas-Repo\TestProject\build\junit928305187827246638.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -435,18 +435,14 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 7.4\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="testproject.TestTest" name="testFact" time="0.005" />
-  <testcase classname="testproject.TestTest" name="testMultiply" time="0.001" />
-  <testcase classname="testproject.TestTest" name="testFibonacci" time="0.007">
-    <failure message="expected:&lt;7&gt; but was:&lt;8&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;7&gt; but was:&lt;8&gt;
-	at testproject.TestTest.testFibonacci(TestTest.java:50)
-</failure>
-  </testcase>
-  <testcase classname="testproject.TestTest" name="testOutputText" time="0.001" />
-  <system-out><![CDATA[Fact
+  <testcase classname="testproject.TestTest" name="testOutputText" time="0.003" />
+  <testcase classname="testproject.TestTest" name="testFact" time="0.0" />
+  <testcase classname="testproject.TestTest" name="testMultiply" time="0.0" />
+  <testcase classname="testproject.TestTest" name="testFibonacci" time="0.0" />
+  <system-out><![CDATA[OutputText
+Fact
 multiply
 Fibonacci
-OutputText
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
