@@ -59,7 +59,7 @@ public class TestTest {
     public void testFact() {
         System.out.println("Fact");
         int num = 2;
-        int expResult = 2;
+        int expResult = 5;
         int result = testproject.Test.Fact(num);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
