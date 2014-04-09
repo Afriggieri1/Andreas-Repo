@@ -1,21 +1,34 @@
 package com.pest.demo;
 
 public class Calculator {
-	
-	public int add(int x, int y) {
-		return x+y;
-	}
-	
-	public int sub(int x, int y) {
-		return x-y;
-	}
-	
-	public int multiply(int x, int y) {
-		return x*y;
-	}
-	
-	public int divide(int x, int y) {
-		return x/y;
-	}
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int divide(int a, int b) {
+        if (b == 0) {
+            return 0;
+        } else {
+            return a / b;
+        }
+    }
+    
+     public String getMessage(int j) {
+        String out = "";
+        for (int i = 0; i < j; i++) {
+            out += "Hello World!! ";
+
+        }
+        return out;
+    }
 
 }
