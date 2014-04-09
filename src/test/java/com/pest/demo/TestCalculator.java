@@ -31,7 +31,7 @@ public class TestCalculator {
         
         @Test
 	public void testDivide() {
-		assertEquals(5, calc.divide(25, 5));
+		assertEquals(10, calc.divide(25, 5));
 	}
         
         @Test
@@ -41,7 +41,7 @@ public class TestCalculator {
         
         @Test
 	public void testMessage() {
-		assertEquals("Hello World!! ", calc.getMessage(1));
+		assertEquals("Hello World!! ", calc.getMessage(2));
 	}
 
 }
