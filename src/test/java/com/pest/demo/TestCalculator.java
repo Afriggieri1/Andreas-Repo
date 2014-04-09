@@ -16,7 +16,7 @@ public class TestCalculator {
 
 	@Test
 	public void testAddPositiveNumbers() {
-		assertEquals(5, calc.add(2, 3));
+		assertEquals(6, calc.add(2, 3));
 	}
 	
 	@Test
@@ -36,7 +36,7 @@ public class TestCalculator {
         
         @Test
 	public void testDivBy0() {
-		assertEquals(0, calc.divide(20, 0));
+		assertEquals(1, calc.divide(20, 0));
 	}
         
         @Test
