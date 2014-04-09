@@ -26,7 +26,22 @@ public class TestCalculator {
 	
 	@Test
 	public void testSubtraction() {
+		assertEquals(2, calc.subtract(10, 8));
+	}
+        
+        @Test
+	public void testDivide() {
 		assertEquals(5, calc.divide(25, 5));
+	}
+        
+        @Test
+	public void testDivBy0() {
+		assertEquals(0, calc.divide(20, 0));
+	}
+        
+        @Test
+	public void testMessage() {
+		assertEquals("Hello World!! ", calc.getMessage(1));
 	}
 
 }
