@@ -24,7 +24,7 @@ public class MapTest {
     @Test
     public void testSetMapSize() {
         System.out.println("setMapSize");
-        int size = 0;
+        //int size = 0;
         Map instance =new Map(5);
         instance.setMapSize(6);
         assertEquals(6,instance.getSize());

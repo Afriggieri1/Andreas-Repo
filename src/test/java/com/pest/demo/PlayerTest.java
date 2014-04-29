@@ -77,7 +77,7 @@ public class PlayerTest {
     @Test
     public void testSetTrail() {
         System.out.println("setTrail");
-        ArrayList<Position> newTrail = new ArrayList();
+        ArrayList<Position> newTrail = new ArrayList<Position>();
         Position newPos = new Position(1,2,new Tile());
         newTrail.add(newPos);
         p.setTrail(newTrail);

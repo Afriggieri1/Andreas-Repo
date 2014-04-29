@@ -20,9 +20,9 @@ public class Game {
     int SizeOfMap;
     int NumOfPlayers;
     Map DefaultMap;
-    ArrayList<Player> players = new ArrayList(); // Array list hoding all the players
+    ArrayList<Player> players = new ArrayList<Player>(); // Array list hoding all the players
     //ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the maps
-    ArrayList<Player> winners = new ArrayList();
+    ArrayList<Player> winners = new ArrayList<Player>();
     boolean won = false;
 
     public Game(int size, int players) {
@@ -162,6 +162,7 @@ public class Game {
         //    System.out.print("Player " + winner.getPlayerid() + " ");
         //}
         // System.out.println("won the game!");
+        sc.close();
     }
 
     public boolean isWater(Position pos) {

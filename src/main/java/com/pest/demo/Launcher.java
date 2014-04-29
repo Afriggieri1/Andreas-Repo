@@ -6,7 +6,6 @@
 package com.pest.demo;
 
 import java.util.*;
-import java.io.*;
 
 /**
  *
@@ -83,6 +82,7 @@ public class Launcher {
 
         Game game = new Game(size, noplayers);
         game.startGame();
+        sc.close();
     }
 
     public static Boolean InputPlayers(int players) {

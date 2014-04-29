@@ -22,7 +22,7 @@ public class Player {
         this.PlayerID = ID;
         //this.PlayerMap = null;
         this.CurrentPosition = null;
-        trail = new ArrayList();
+        trail = new ArrayList<Position>();
     }
 
     public int getPlayerid() {
