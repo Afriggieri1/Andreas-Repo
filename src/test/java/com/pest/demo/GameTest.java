@@ -1,33 +1,21 @@
 package com.pest.demo;
 
-import org.junit.After;
-import org.junit.AfterClass;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.*;
+
 
 public class GameTest{
     Game game;
      
-    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    
     @Before
     public void setUp(){
         game=new Game(2,5);
          
         
     }
-    
-    @Before
-	public void setUpStreams() {
-	    System.setOut(new PrintStream(outContent));
-	}
-       
-        //Position p=new Position(3,3,t);
-        
-        @Test
+     @Test
         public void testWatertype(){
             Tile t=new Tile();
             Position p=new Position(3,3,t);
@@ -35,5 +23,21 @@ public class GameTest{
             //Game game=new Game(0,0);
             assertEquals(true,game.isWater(p));
         }
-        
+    @Test
+        public void testTreasuretype(){
+            Tile t=new Tile();
+            Position p=new Position(3,3,t);
+            p.getTile().setType('T');
+            //Game game=new Game(0,0);
+            assertEquals(true,game.isTreasure(p));
+        }
+    @Test
+    public void testCreatePlayers(){
+        int expresult =12;
+        Game newgame=new Game(2,6);
+        int result=newgame.CreatePlayers().size();
+        assertEquals(expresult,result);
+    }
+    
+    
 }

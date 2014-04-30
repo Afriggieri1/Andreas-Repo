@@ -32,7 +32,7 @@ public class Game {
         this.DefaultMap = CreateMap();
     }
 
-    private ArrayList<Player> CreatePlayers() {
+    public ArrayList<Player> CreatePlayers() {
         for (int i = 0; i < NumOfPlayers; i++) {
             Player p = new Player(i + 1);
             players.add(p);
@@ -168,7 +168,7 @@ public class Game {
         return pos.getTile().getType() == 'W';
     }
 
-    private boolean isTreasure(Position pos) {
+    public boolean isTreasure(Position pos) {
         return pos.getTile().getType() == 'T';
     }
 
