@@ -44,5 +44,7 @@ public class LauncherTest {
         assertEquals(false,launcher.InputMapsize(2,4));
         assertEquals(false,launcher.InputMapsize(8,5));
         assertEquals(true,launcher.InputMapsize(8,9));
+        assertEquals(false,launcher.InputMapsize(8,0));
+        assertEquals(false,launcher.InputMapsize(8,51));
     }
 }

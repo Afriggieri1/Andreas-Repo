@@ -8,6 +8,7 @@ package com.pest.demo;
 
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -85,5 +86,28 @@ public class MapTest {
         
     }
 
+    @Test
+    public void testStartPosition() {
+    	System.out.println("testStartPosition");
+    	
+    	Tile[][] MapTemplate = new Tile[5][5];
+
+		for (int j = 0; j < 5; j++) {
+			for (int k = 0; k < 5; k++) {
+				MapTemplate[j][k] = new Tile('W');
+			}
+		}
+
+		Map map = new Map(MapTemplate);
+		
+		MapTemplate[2][2].setType('G');
+		
+		Position startPos = map.startPosition();
+		
+		assertEquals(2,startPos.getX());
+		assertEquals(2,startPos.getY());
+		
+    	
+    }
     
 }
