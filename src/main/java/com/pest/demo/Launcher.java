@@ -5,7 +5,8 @@
  */
 package com.pest.demo;
 
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 /**
  *
@@ -19,16 +20,62 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      int noplayers;
+      int noplayers;      
       int size;
       Scanner sc=new Scanner(System.in);
         do {
-            System.out.print("Enter Number of players (min:2 max:8): ");
-            noplayers = sc.nextInt();
-        } while (InputPlayers(noplayers)!=true);
+            System.out.print("Enter number of players (min:2 max:8): ");
+            try {
+                noplayers = sc.nextInt();
+            } catch (InputMismatchException iomismatch) {
+                System.out.println("Invalid input!");
+                noplayers = 100;
+                sc.next();
+
+            }
+            do {
+
+                if (noplayers> 8) {
+                    System.out.print("Please Re-enter your choice between 2 & 8: ");
+                    try {
+                        noplayers = sc.nextInt();
+
+                    } catch (InputMismatchException iomismatch) {
+                        System.out.println("Invalid input!");
+                        noplayers = 100;
+                        sc.next();
+                    }
+                }
+            } while (noplayers > 8);
+           
+                //System.out.print("please re enter correct number: ");
+            // noplayers=sc.nextInt();
+        } while (InputPlayers(noplayers) != true);
+        
         do {
             System.out.print("Enter the map size nxn(max:50): ");
-            size = sc.nextInt();
+            try{
+                size = sc.nextInt();
+            }
+            catch(InputMismatchException iomismatch){
+                System.out.println("invalid input");
+                size=100;
+                sc.next();
+            }
+            do {
+
+                if (size > 50) {
+                    System.out.print("Please Re-enter your choice: ");
+                    try {
+                        size = sc.nextInt();
+
+                    } catch (InputMismatchException iomismatch) {
+                        System.out.println("Invalid input!");
+                        size = 100;
+                        sc.next();
+                    }
+                }
+            } while (size > 50);
         }while(InputMapsize(noplayers,size)!=true);
         
         
