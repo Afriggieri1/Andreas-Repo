@@ -19,9 +19,21 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      int noplayers;      
-      int size;
-      Scanner sc=new Scanner(System.in);
+      int noplayers=getPlayers();     
+      int size=getMapsize(noplayers);
+      
+        
+        
+        
+
+        Game game = new Game(size, noplayers);
+        game.startGame();
+        
+    }
+    
+    public static int getPlayers(){
+        Scanner sc=new Scanner(System.in);
+        int noplayers;
         do {
             System.out.print("Enter number of players (min:2 max:8): ");
             try {
@@ -50,7 +62,12 @@ public class Launcher {
                 //System.out.print("please re enter correct number: ");
             // noplayers=sc.nextInt();
         } while (InputPlayers(noplayers) != true);
-        
+        return noplayers;
+    }
+    
+    public static int getMapsize(int noplayers){
+        Scanner sc=new Scanner(System.in);
+        int size;
         do {
             System.out.print("Enter the map size nxn(max:50): ");
             try{
@@ -76,13 +93,7 @@ public class Launcher {
                 }
             } while (size > 50);
         }while(InputMapsize(noplayers,size)!=true);
-        
-        
-        
-
-        Game game = new Game(size, noplayers);
-        game.startGame();
-        sc.close();
+        return size;
     }
 
     public static Boolean InputPlayers(int players) {
