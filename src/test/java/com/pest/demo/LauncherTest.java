@@ -19,7 +19,7 @@ import java.io.*;
  */
 public class LauncherTest {
     
-    Launcher launcher;
+    static Launcher launcher;
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     
     @Before
@@ -32,19 +32,21 @@ public class LauncherTest {
 	    System.setOut(new PrintStream(outContent));
 	}
     
+    
     @Test
     public void testiputplayers(){
-        assertEquals(true,launcher.InputPlayers(4));
-        assertEquals(false,launcher.InputPlayers(9));
-        assertEquals(false,launcher.InputPlayers(1));
+        assertEquals(true,launcher.CheckPlayers(4));
+        assertEquals(false,launcher.CheckPlayers(9));
+        assertEquals(false,launcher.CheckPlayers(-1));
     }
     @Test
     public void testmapsize(){
-        assertEquals(true,launcher.InputMapsize(2,5));
-        assertEquals(false,launcher.InputMapsize(2,4));
-        assertEquals(false,launcher.InputMapsize(8,5));
-        assertEquals(true,launcher.InputMapsize(8,9));
-        assertEquals(false,launcher.InputMapsize(8,0));
-        assertEquals(false,launcher.InputMapsize(8,51));
+        assertEquals(true,launcher.CheckMapsize(2,5));
+        assertEquals(false,launcher.CheckMapsize(2,4));
+        assertEquals(false,launcher.CheckMapsize(8,5));
+        assertEquals(true,launcher.CheckMapsize(8,9));
+        assertEquals(false,launcher.CheckMapsize(8,0));
+        assertEquals(false,launcher.CheckMapsize(8,51));
     }
+    
 }

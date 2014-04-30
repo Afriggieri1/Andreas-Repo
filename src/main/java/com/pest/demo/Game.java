@@ -118,9 +118,9 @@ public class Game {
 
                 System.out.println("Player " + players.get(i).getPlayerid() + ", please choose your next move ([U]p, [D]own, [L]eft or [R]ight)");
                 String turn=sc.next();
-                int r=turn.compareTo("u");
-                System.out.println(r);
-                boolean ok=false;
+                //int r=turn.compareTo("u");
+                //System.out.println(r);
+                boolean ok=false; 
                 do{
                     if(turn.compareTo("u")==0||turn.compareTo("U")==0||turn.compareTo("d")==0||turn.compareTo("D")==0||turn.compareTo("l")==0||turn.compareTo("L")==0||turn.compareTo("r")==0||turn.compareTo("R")==0){
                         ok=true;

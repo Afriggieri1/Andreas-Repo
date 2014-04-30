@@ -5,7 +5,8 @@
  */
 package com.pest.demo;
 
-import java.util.*;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  * 
@@ -17,103 +18,70 @@ public class Launcher {
 	 * @param args
 	 *            the command line arguments
 	 */
-	public static void main(String[] args) {
-		int noplayers = InsertPlayers();
-		int size = InsertMapSize(noplayers);
 
-		Game game = new Game(size, noplayers);
-		game.startGame();
+	public static void main(String[] args) {
+		int noplayers = ReadPlayers();
+		do {
+			if (CheckPlayers(noplayers)) {
+				int size = getMapsize(noplayers);
+
+				Game game = new Game(size, noplayers);
+				game.startGame();
+			}
+		} while (CheckPlayers(noplayers) == false);
 
 	}
 
-	public static int InsertPlayers() {
+	public static boolean CheckPlayers(int noplayers) {
+		if ((noplayers > 0) && (noplayers <= 8))
+			return true;
+		else
+			return false;
 
+	}
+
+	public static int ReadPlayers() {
 		Scanner sc = new Scanner(System.in);
-
-		int noplayers;
+		int players = 0;
+		boolean valid = false;
 		do {
-			System.out.print("Enter number of players (min:2 max:8): ");
 			try {
-				noplayers = sc.nextInt();
+				System.out.print("Enter Number of Players, between 2 and 8: ");
+				players = sc.nextInt();
+				valid = true;
 			} catch (InputMismatchException iomismatch) {
 				System.out.println("Invalid input!");
-				noplayers = 100;
-				sc.next();
-
+				valid = false;
 			}
-			do {
-
-				if (noplayers > 8) {
-					System.out
-							.print("Please Re-enter your choice between 2 & 8: ");
-					try {
-						noplayers = sc.nextInt();
-
-					} catch (InputMismatchException iomismatch) {
-						System.out.println("Invalid input!");
-						noplayers = 100;
-						sc.next();
-					}
-				}
-			} while (noplayers > 8);
-			
-			// System.out.print("please re enter correct number: ");
-			// noplayers=sc.nextInt();
-		} while (InputPlayers(noplayers) != true);
-
-		sc.close();
-		return noplayers;
+		} while (valid == false);
+		//sc.close();
+		return players;
 	}
 
-	public static int InsertMapSize(int noplayers) {
-		int size = 0;
-		boolean valid = false;
+	public static int getMapsize(int noplayers) {
 		Scanner sc = new Scanner(System.in);
+		//sc.useDelimiter("\n");
+		int size = 0;
+		boolean valid = true;
 		do {
-			do {
+			do{
+			//System.out.print("Enter the map size nxn(max:50): ");
+			try {
 				System.out.print("Enter the map size nxn(max:50): ");
-				try {
-					size = sc.nextInt();
-					valid = true;
-				} catch (InputMismatchException iomismatch) {
-					System.out.println("invalid input");
-					valid = false;
-					size=100;
-					sc.next();
-				} catch (Exception e) {
-					System.out.println("something went wrong");
-					valid = false;
-					size=100;
-				}
-			} while (valid == true);
-			do {
-
-				if (size > 50) {
-					System.out.print("Please Re-enter your choice: ");
-					try {
-						size = sc.nextInt();
-
-					} catch (InputMismatchException iomismatch) {
-						System.out.println("Invalid input!");
-						size = 100;
-						sc.next();
-					}
-				}
-			} while (size > 50);
-		} while (InputMapsize(noplayers, size) != true);
-
-		sc.close();
-		return size;
+				size = sc.nextInt();
+			 
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("invalid input");
+				valid = false;
+				//sc.next();
+			}
+			}while(valid==false);
+		} while (CheckMapsize(noplayers, size) != true);
+		//sc.close();
+		return size; 
 	}
 
-	public static Boolean InputPlayers(int players) {
-		if (players > 1 && players < 9) {
-			return true;
-		}
-		return false;
-	}
-
-	public static Boolean InputMapsize(int players, int mapsize) {
+	public static Boolean CheckMapsize(int players, int mapsize) {
 
 		if ((mapsize > 50) || (mapsize <= 0)) {
 			System.out.println("Invalid Map Size");
