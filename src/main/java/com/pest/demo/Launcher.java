@@ -23,7 +23,7 @@ public class Launcher {
       int size;
       Scanner sc=new Scanner(System.in);
         do {
-            System.out.print("Enter number of players (min:2 max:8): ");
+            System.out.print("Enter Number of players (min:2 max:8): ");
             noplayers = sc.nextInt();
         } while (InputPlayers(noplayers)!=true);
         do {
