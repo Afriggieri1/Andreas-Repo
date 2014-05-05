@@ -44,5 +44,14 @@ public class GameTest {
 		int result = newgame.CreatePlayers().size();
 		assertEquals(expresult, result);
 	}
-
+        
+        @Test
+	public void testAssignWater() {
+		int expresult = (16*16)/4;
+		Game newgame = new Game(16, 6);
+                game.CreateMap();
+		int result = newgame.AssignWater();
+		assertEquals(expresult, result);
+	}
 }
+

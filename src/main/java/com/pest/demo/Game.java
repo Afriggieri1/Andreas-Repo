@@ -24,12 +24,14 @@ public class Game {
     //ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the maps
     ArrayList<Player> winners = new ArrayList<Player>();
     boolean won = false;
+    Tile[][] MapTemplate;
 
     public Game(int size, int players) {
         this.SizeOfMap = size;
         this.NumOfPlayers = players;
         this.players = CreatePlayers();
         this.DefaultMap = CreateMap();
+        
     }
 
     public ArrayList<Player> CreatePlayers() {
@@ -40,10 +42,10 @@ public class Game {
         return players;
     }
 
-    private Map CreateMap() {
+    public Map CreateMap() {
 
-        Tile[][] MapTemplate = new Tile[SizeOfMap][SizeOfMap];
-        int TotalTiles = SizeOfMap * SizeOfMap;
+         MapTemplate= new Tile[SizeOfMap][SizeOfMap];
+        
 
         //assign grass
         for (int j = 0; j < SizeOfMap; j++) {
@@ -53,8 +55,36 @@ public class Game {
 
             }
         }
+        int TreasureX = (int) (Math.random() * SizeOfMap);
+        int TreasureY = (int) (Math.random() * SizeOfMap);
+        MapTemplate[TreasureY][TreasureX].setType('T');
+        
+        AssignWater();      
 
-        //assign water
+        //System.out.println(TreasureX);
+        //System.out.println(TreasureY);
+
+       
+
+        Map newMap = new Map(MapTemplate);
+
+        //for (int i = 0; i < NumOfPlayers; i++) {
+        // players.get(i).setMap(new Map(MapTemplate.clone()));
+        //maps.add(players.get(i).getMap());
+        // }
+        //Din kolla trid titlaq thawn taht
+        for (int i = 0; i < SizeOfMap; i++) {
+            for (int j = 0; j < SizeOfMap; j++) {
+                System.out.print(MapTemplate[i][j].getType() + "  ");
+            }
+            System.out.println("");
+        }
+        return newMap;
+    }
+     
+//assign water
+    public int AssignWater(){
+        int TotalTiles = SizeOfMap * SizeOfMap;
         int WaterTiles = TotalTiles / 4;
 
         int count = 0;
@@ -66,31 +96,10 @@ public class Game {
                 count++;
             }
         } while (count <= WaterTiles);
-
-        //assign treasure
-        int TreasureX = (int) (Math.random() * SizeOfMap);
-        int TreasureY = (int) (Math.random() * SizeOfMap);
-
-        System.out.println(TreasureX);
-        System.out.println(TreasureY);
-
-        MapTemplate[TreasureY][TreasureX].setType('T');
-
-        Map newMap = new Map(MapTemplate);
-
-        //for (int i = 0; i < NumOfPlayers; i++) {
-        // players.get(i).setMap(new Map(MapTemplate.clone()));
-        //maps.add(players.get(i).getMap());
-        // }
-        for (int i = 0; i < SizeOfMap; i++) {
-            for (int j = 0; j < SizeOfMap; j++) {
-                System.out.print(MapTemplate[i][j].getType() + "  ");
-            }
-            System.out.println("");
-        }
-        return newMap;
+        return WaterTiles;
     }
 
+  
     public void startGame() {
         Scanner sc = new Scanner(System.in);
         //set starting positions for all players
