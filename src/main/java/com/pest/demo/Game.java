@@ -182,7 +182,7 @@ public class Game {
         return pos.getTile().getType() == 'T';
     }
 
-    public void GenerateHTMLFile(Player CurrentPlayer) {
+    public File GenerateHTMLFile(Player CurrentPlayer) {
 
         for (int i = 0; i < CurrentPlayer.getTrail().size(); i++) {
             Position CurrentTile = CurrentPlayer.getTrail().get(i);
@@ -229,9 +229,9 @@ public class Game {
         }
 
         code += "</table></body></html>";
-
+    File map= new File("map_player_" + CurrentPlayer.getPlayerid() + ".html");
         try {
-            File map = new File("map_player_" + CurrentPlayer.getPlayerid() + ".html");
+            
             map.createNewFile();
             map.delete();
             map.createNewFile();
@@ -252,5 +252,6 @@ public class Game {
             Position CurrentTile = CurrentPlayer.getTrail().get(i);
             CurrentTile.getTile().setVisibility(false);
         }
+        return map;
     }
 }

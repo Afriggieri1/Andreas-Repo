@@ -51,6 +51,7 @@ public class GameTest {
 		int expresult = (16*16)/4;
 		Game newgame = new Game(16, 6);
                 game.CreateMap();
+                
 		int result = newgame.AssignWater();
 		assertEquals(expresult, result);
 	}
@@ -59,8 +60,8 @@ public class GameTest {
 	public void testGenerateHtmlFile(){	
             Game game=new Game(16,2);
             Player p=new Player(1);
-            game.GenerateHTMLFile(p);
-            File f1=new File("map_player_1");
+            
+            File f1=game.GenerateHTMLFile(p);
             assertTrue(f1.exists());
         }
 }
