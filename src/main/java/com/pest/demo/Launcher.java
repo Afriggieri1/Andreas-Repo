@@ -24,8 +24,9 @@ public class Launcher {
 		do {
 			if (CheckPlayers(noplayers)) {
 				int size = getMapsize(noplayers);
-
-				Game game = new Game(size, noplayers);
+                                int dificulty=ReadDificulty();
+                                System.out.println(dificulty);
+				Game game = new Game(size, noplayers,dificulty);
 				game.startGame();
 			}
 		} while (CheckPlayers(noplayers) == false);
@@ -56,6 +57,23 @@ public class Launcher {
 		} while (valid == false);
 		//sc.close();
 		return players;
+	}
+        public static int ReadDificulty() {
+		Scanner sc = new Scanner(System.in);
+		int dif=1;
+		boolean valid = false;
+		do {
+			try {
+				System.out.print("Enter dificulty of the game 1 for safe and 2 for Hazardous : ");
+				dif = sc.nextInt();
+				valid = true;
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("Invalid input!");
+				valid = false;
+			}
+		} while (valid == false);
+		//sc.close();
+		return dif;
 	}
 
 	public static int getMapsize(int noplayers) {

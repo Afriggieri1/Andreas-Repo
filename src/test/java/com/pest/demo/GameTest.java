@@ -11,7 +11,7 @@ public class GameTest {
 
 	@Before
 	public void setUp() {
-		game = new Game(2, 5);
+		game = new Game(2, 5,1);
 
 	}
 
@@ -42,7 +42,7 @@ public class GameTest {
 	@Test
 	public void testCreatePlayers() {
 		int expresult = 12;
-		Game newgame = new Game(2, 6);
+		Game newgame = new Game(2, 6,1);
 		int result = newgame.CreatePlayers().size();
 		assertEquals(expresult, result);
 	}
@@ -50,16 +50,26 @@ public class GameTest {
         @Test
 	public void testAssignWater() {
 		int expresult = (16*16)/4;
-		Game newgame = new Game(16, 6);
+		Game newgame = new Game(16, 6,1);
                 game.CreateMap();
                 
 		int result = newgame.AssignWater();
 		assertEquals(expresult, result);
 	}
         
+         
+        @Test
+	public void testAssignDificulty() {
+		int expresult = (16*16)/4;
+		Game newgame = new Game(16, 6,1);
+                              
+		int result = newgame.assignDificulty();
+		assertEquals(expresult, result);
+	}
+        
         @Test
 	public void testGenerateHtmlFile(){	
-            Game game=new Game(16,2);
+            Game game=new Game(16,2,1);
             Player p=new Player(1);
             
             File f1=game.GenerateHTMLFile(p);
@@ -68,7 +78,7 @@ public class GameTest {
         
          @Test
 	public void testtotalWinners(){	
-            Game game=new Game(16,2);
+            Game game=new Game(16,2,1);
             Player p1=new Player(1);
             Player p2=new Player(2);
             game.winners.add(p1);

@@ -19,6 +19,7 @@ public class Game {
 
     int SizeOfMap;
     int NumOfPlayers;
+    int diffic;
     Map DefaultMap;
     ArrayList<Player> players = new ArrayList<Player>(); // Array list hoding all the players
     //ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the maps
@@ -26,12 +27,13 @@ public class Game {
     boolean won = false;
     Tile[][] MapTemplate;
 
-    public Game(int size, int players) {
+    public Game(int size, int players,int d) {
         this.SizeOfMap = size;
         this.NumOfPlayers = players;
         this.players = CreatePlayers();
         this.DefaultMap = CreateMap();
-        
+        this.diffic=d;
+       
     }
 
     public ArrayList<Player> CreatePlayers() {
@@ -84,9 +86,9 @@ public class Game {
      
 //assign water
     public int AssignWater(){
-        int TotalTiles = SizeOfMap * SizeOfMap;
-        int WaterTiles = TotalTiles / 4;
-
+        int TotalTiles = assignDificulty();
+       
+        System.out.println("TotalTiles= "+TotalTiles);
         int count = 0;
         do {
             int xwater = (int) (Math.random() * SizeOfMap);
@@ -95,10 +97,26 @@ public class Game {
                 MapTemplate[ywater][xwater].setType('W');
                 count++;
             }
-        } while (count <= WaterTiles);
-        return WaterTiles;
+        } while (count <= TotalTiles);
+        System.out.println("Water are set");
+        return TotalTiles;
     }
-
+    public int assignDificulty(){
+        int TotalTiles = SizeOfMap * SizeOfMap;
+        
+        if(diffic == 1){
+            int WaterTiles = TotalTiles / 4;
+            return WaterTiles;
+        }
+        else{
+           double WaterTiles1 = TotalTiles /4 ;
+           double WaterTiles2= TotalTiles *0.35 ;
+           
+           int WaterTiles=(int)(WaterTiles1 + (Math.random() * (WaterTiles2 - WaterTiles1)));
+            return WaterTiles;
+        }
+        //return 1;
+    }
   
     public void startGame() {
         Scanner sc = new Scanner(System.in);
