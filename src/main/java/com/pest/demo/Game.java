@@ -115,15 +115,7 @@ public class Game {
             //start the transitions
             for (int i = 0; i < players.size(); i++) {
                 //each player chooses where to move
-                if (isWater(players.get(i).getPosition()) == true) {
-                    //check for water
-                    Position startPos = players.get(i).getTrail().get(0);
-                    players.get(i).ResetTrail();
-                    players.get(i).setPosition(startPos);
-
-                    System.out.println("You've ran out of land! Return to starting position (Refresh)");
-                    GenerateHTMLFile(players.get(i));
-                }
+                checkTileForWater(i);
 
                 System.out.println("Player " + players.get(i).getPlayerid() + ", please choose your next move ([U]p, [D]own, [L]eft or [R]ight)");
                 String turn=sc.next();
@@ -157,6 +149,19 @@ public class Game {
         //}
         // System.out.println("won the game!");
         sc.close();
+    }
+    public int checkTileForWater(int i){
+        if (isWater(players.get(i).getPosition()) == true) {
+                    //check for water
+                    Position startPos = players.get(i).getTrail().get(0);
+                    players.get(i).ResetTrail();
+                    players.get(i).setPosition(startPos);
+
+                    System.out.println("You've ran out of land! Return to starting position (Refresh)");
+                    GenerateHTMLFile(players.get(i));
+                }
+        int ret=players.get(i).getTrail().size();
+        return ret;
     }
     public int totalWinners(){
          int TotalWinners = winners.size();
