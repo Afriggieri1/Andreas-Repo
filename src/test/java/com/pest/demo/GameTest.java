@@ -64,5 +64,16 @@ public class GameTest {
             File f1=game.GenerateHTMLFile(p);
             assertTrue(f1.exists());
         }
+        
+         @Test
+	public void testtotalWinners(){	
+            Game game=new Game(16,2);
+            Player p1=new Player(1);
+            Player p2=new Player(2);
+            game.winners.add(p1);
+            game.winners.add(p2);
+            
+            assertEquals(0,game.totalWinners());
+        }
 }
 

@@ -150,8 +150,16 @@ public class Game {
 
             }
         } while (won == false);
-
-        int TotalWinners = winners.size();
+        totalWinners();
+       
+        //for (Player winner : winners) {
+        //    System.out.print("Player " + winner.getPlayerid() + " ");
+        //}
+        // System.out.println("won the game!");
+        sc.close();
+    }
+    public int totalWinners(){
+         int TotalWinners = winners.size();
         do {
             if (TotalWinners == 1) {
                 System.out.println("Player " + winners.get(0).getPlayerid() + " has won the game!");
@@ -167,11 +175,7 @@ public class Game {
                 }
             }
         } while (TotalWinners > 0);
-        //for (Player winner : winners) {
-        //    System.out.print("Player " + winner.getPlayerid() + " ");
-        //}
-        // System.out.println("won the game!");
-        sc.close();
+        return TotalWinners;
     }
 
     public boolean isWater(Position pos) {
