@@ -182,7 +182,7 @@ public class Game {
         return pos.getTile().getType() == 'T';
     }
 
-    private void GenerateHTMLFile(Player CurrentPlayer) {
+    public void GenerateHTMLFile(Player CurrentPlayer) {
 
         for (int i = 0; i < CurrentPlayer.getTrail().size(); i++) {
             Position CurrentTile = CurrentPlayer.getTrail().get(i);

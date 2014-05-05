@@ -3,6 +3,7 @@ package com.pest.demo;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.*;
 
 public class GameTest {
 	Game game;
@@ -53,5 +54,14 @@ public class GameTest {
 		int result = newgame.AssignWater();
 		assertEquals(expresult, result);
 	}
+        
+        @Test
+	public void testGenerateHtmlFile(){	
+            Game game=new Game(16,2);
+            Player p=new Player(1);
+            game.GenerateHTMLFile(p);
+            File f1=new File("map_player_1");
+            assertTrue(f1.exists());
+        }
 }
 
