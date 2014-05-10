@@ -21,7 +21,7 @@ public class Map {
     int MapSize;
     Tile[][] MapArray;
 
-    private Map(int size) {
+    public Map(int size) {
         this.MapSize = size;
         this.MapArray = null;//create the array
     }
