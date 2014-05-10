@@ -10,11 +10,18 @@ package com.pest.demo;
  * @author Andreas
  */
 public class Map {
-
+    //updates done for part 3
+    private static Map instance=null;
+    public static Map getInstance(Tile[][] array){
+        if(instance==null){
+            instance=new Map(array);
+        }
+        return instance;
+    }
     int MapSize;
     Tile[][] MapArray;
 
-    public Map(int size) {
+    private Map(int size) {
         this.MapSize = size;
         this.MapArray = null;//create the array
     }
