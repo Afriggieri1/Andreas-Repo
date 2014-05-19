@@ -25,13 +25,13 @@ public class Game {
     //ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the maps
     ArrayList<Player> winners = new ArrayList<Player>();
     boolean won = false;
-    Tile[][] MapTemplate;
+    //Tile[][] MapTemplate;
 
     public Game(int size, int players,int d) {
         this.SizeOfMap = size;
         this.NumOfPlayers = players;
         this.players = CreatePlayers();
-        this.DefaultMap = CreateMap();
+       // this.DefaultMap = CreateMap();
         this.diffic=d;
        
     }
@@ -44,7 +44,7 @@ public class Game {
         return players;
     }
 
-    public Map CreateMap() {
+    /*public Map CreateMap() {
 
          MapTemplate= new Tile[SizeOfMap][SizeOfMap];
         
@@ -116,15 +116,16 @@ public class Game {
             return WaterTiles;
         }
         //return 1;
-    }
+    }*/
   
     public void startGame() {
         Scanner sc = new Scanner(System.in);
         //set starting positions for all players
         for (int i = 0; i < players.size(); i++) {
             Player AlterPlayer = players.get(i);
-
-            Position startPos = this.DefaultMap.startPosition();
+            MapCreator creator = new MapCreator();
+	     creator.createMap(diffic, SizeOfMap);
+            Position startPos = Map.startPosition();
             AlterPlayer.setPosition(startPos);
             GenerateHTMLFile(AlterPlayer);
         }
@@ -225,27 +226,27 @@ public class Game {
         for (int i = 0; i < SizeOfMap; i++) {
             code += "<tr>";
             for (int j = 0; j < SizeOfMap; j++) {
-                if (this.DefaultMap.getTile(i, j).getVisibility() == false) {
+                if (Map.getTile(i, j).getVisibility() == false) {
                     code += "<td width='50' height='50'> </td>\n";
                 } else {
-                    if (this.DefaultMap.getTile(i, j).getType() == 'T') {
+                    if (Map.getTile(i, j).getType() == 'T') {
                         //tile contains treasure
                         code += "<TD BGCOLOR=\"#ffff00\" width='50' height='50'align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"Happy_smiley_face.png\" height='30' width='30'></img>";
                         }
                     }
-                    if (this.DefaultMap.getTile(i, j).getType() == 'G') {
+                    if (Map.getTile(i, j).getType() == 'G') {
                         //tile contains grass
                         code += "<TD BGCOLOR=\"#00ff00\" width='50' height='50' align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"smiley.png\" height='30' width='30'></img>";
                         }
                     }
-                    if (this.DefaultMap.getTile(i, j).getType() == 'W') {
+                    if (Map.getTile(i, j).getType() == 'W') {
                         //tile contains water
                         code += "<TD BGCOLOR=\"#0000ff\" width='50' height='50'align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"sad.png\" height='30' width='30'></img>";
                         }
                     }
