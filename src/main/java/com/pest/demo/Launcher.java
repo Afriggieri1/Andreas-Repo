@@ -32,7 +32,7 @@ public class Launcher {
 	public static void main(String[] args) {
 
 		ReadInputs();
-		Game game = new Game(size, noplayers, difficulty);
+		Game game = new Game(size, noplayers, difficulty, teams_amount);
 		game.startGame();
 
 	}
@@ -142,9 +142,6 @@ public class Launcher {
 					valid_teams = false;
 				}
 			} while (valid_teams == false);
-		}
-		else {
-			
 		}
 	}
 

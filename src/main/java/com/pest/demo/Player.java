@@ -87,7 +87,8 @@ public class Player implements ObserverInterface{
         }
     }
     
-    public void Update(){
-    	
+    public void Update(ArrayList<Position> t){
+    	this.trail = t;
+    	this.CurrentPosition = trail.get(trail.size()-1);
     }
 }

@@ -11,7 +11,7 @@ public class GameTest {
 Map map=null;
 	@Before
 	public void setUp() {
-		game = new Game(2, 5,1);
+		game = new Game(2, 5,1,0);
                 map = SafeMap.getInstance(5);
 	}
 
@@ -42,7 +42,7 @@ Map map=null;
 	@Test
 	public void testCreatePlayers() {
 		int expresult = 12;
-		Game newgame = new Game(2, 6,1);
+		Game newgame = new Game(2, 6,1,0);
 		int result = newgame.CreatePlayers().size();
 		assertEquals(expresult, result);
 	}
@@ -68,13 +68,13 @@ Map map=null;
         
          @Test
 	public void testtotalWinners(){	
-            Game game=new Game(16,2,1);
+            Game game=new Game(16,2,1,0);
             Player p1=new Player(1);
             Player p2=new Player(2);
             game.winners.add(p1);
             game.winners.add(p2);
             
-            assertEquals(0,game.totalWinners());
+            assertEquals(0,game.DisplayWinners());
         }
         
        /*   @Test

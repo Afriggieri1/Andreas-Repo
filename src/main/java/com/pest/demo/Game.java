@@ -19,21 +19,22 @@ public class Game {
 
 	int SizeOfMap;
 	int NumOfPlayers;
+	int NumOfTeams;
 	int difficulty;
 	Map DefaultMap;
-	ArrayList<Player> players = new ArrayList<Player>(); // Array list hoding
-															// all the players
-	// ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the
-	// maps
+	ArrayList<Player> players = new ArrayList<Player>();
+	ArrayList<Team> teams = new ArrayList<Team>();
 	ArrayList<Player> winners = new ArrayList<Player>();
 	boolean won = false;
 
 	// Tile[][] MapTemplate;
 
-	public Game(int size, int players, int d) {
+	public Game(int size, int players, int d, int t) {
 		this.SizeOfMap = size;
 		this.NumOfPlayers = players;
+		this.NumOfTeams = t;
 		this.players = CreatePlayers();
+		this.teams = CreateTeams();
 		// this.DefaultMap = CreateMap();
 		this.difficulty = d;
 
@@ -45,6 +46,14 @@ public class Game {
 			players.add(p);
 		}
 		return players;
+	}
+
+	public ArrayList<Team> CreateTeams() {
+		for (int i = 0; i < NumOfTeams; i++) {
+			Team t = new Team();
+			teams.add(t);
+		}
+		return teams;
 	}
 
 	/*
@@ -97,8 +106,131 @@ public class Game {
 	 */
 
 	public void startGame() {
-		Scanner sc = new Scanner(System.in);
+
 		// set starting positions for all players
+		if (NumOfTeams == 0) {
+			IndividualPlay();
+		} else {
+			TeamPlay();
+		}
+
+		DisplayWinners();
+
+		// for (Player winner : winners) {
+		// System.out.print("Player " + winner.getPlayerid() + " ");
+		// }
+		// System.out.println("won the game!");
+	}
+
+	public void AssignPlayersInTeams() {
+		for (int i = 0; i < players.size(); i++) {
+			Player p = players.get(i);
+			int team_num = (int) (Math.random() * (NumOfTeams));
+			teams.get(team_num).AttachPlayer(p);
+
+		}
+	}
+
+	public void TeamPlay() {
+		boolean valid_teams = false;
+	
+		//makes sure that there are no teams with zero players
+		for (int i = 0; i < teams.size(); i++) {
+			do {
+				valid_teams = true;
+				if (teams.get(i).getPlayers().size() == 0) {
+					for (int j = 0; j < teams.size(); j++) {
+						teams.get(j).ClearPlayers();
+					}
+					AssignPlayersInTeams();
+					i=0;
+					valid_teams = false;
+				}
+			} while (valid_teams == false);
+		}
+
+		for (int i = 0; i < teams.size(); i++) {
+
+			MapCreator creator = new MapCreator();
+			creator.createMap(difficulty, SizeOfMap);
+			Position startPos = Map.startPosition();
+			teams.get(i).setPosition(startPos);
+			teams.get(i).NotifyPlayers();
+			System.out.println("Number of players in team: "
+					+ teams.get(i).getPlayers().size());
+		}
+
+		for (int i = 0; i < players.size(); i++) {
+			Player p = players.get(i);
+			GenerateHTMLFile(p);
+		}
+
+		Scanner sc = new Scanner(System.in);
+
+		do {
+			// start the transitions
+			for (int i = 0; i < teams.size(); i++) {
+				// each player chooses where to move
+				Player ToPlay = teams.get(i).SelectPlayer();
+				if (checkTileForWater(ToPlay.getPlayerid() - 1) == 1) {
+					teams.get(i).setTrail(ToPlay.getTrail());
+					teams.get(i).NotifyPlayers();
+
+					for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+						GenerateHTMLFile(teams.get(i).getPlayers().get(j));
+					}
+				}
+
+				System.out
+						.println("Player "
+								+ ToPlay.getPlayerid()
+								+ " (Team "
+								+ (i + 1)
+								+ "), please choose your next move ([U]p, [D]own, [L]eft or [R]ight)");
+				String turn = sc.next();
+				// int r=turn.compareTo("u");
+				// System.out.println(r);
+				boolean valid_move = false;
+				do {
+					if (turn.compareTo("u") == 0 || turn.compareTo("U") == 0
+							|| turn.compareTo("d") == 0
+							|| turn.compareTo("D") == 0
+							|| turn.compareTo("l") == 0
+							|| turn.compareTo("L") == 0
+							|| turn.compareTo("r") == 0
+							|| turn.compareTo("R") == 0) {
+						valid_move = true;
+					} else {
+						System.out
+								.print("Enter correct choice ([U]p, [D]own, [L]eft or [R]ight) : ");
+						turn = sc.next();
+						valid_move = false;
+					}
+				} while (valid_move == false);
+				ToPlay.move(turn.charAt(0), this.DefaultMap);
+				teams.get(i).setPosition(ToPlay.getPosition());
+				// update all player trails and current pos
+				teams.get(i).NotifyPlayers();
+
+				// generate html file for each play in the team
+				for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+					GenerateHTMLFile(teams.get(i).getPlayers().get(j));
+				}
+
+				// if won, store winners
+				if (isTreasure(ToPlay.getPosition()) == true) {
+					for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
+						winners.add(teams.get(i).getPlayers().get(j));
+					}
+					won = true;
+				}
+
+			}
+		} while (won == false);
+	}
+
+	public void IndividualPlay() {
+		Scanner sc = new Scanner(System.in);
 		for (int i = 0; i < players.size(); i++) {
 			Player AlterPlayer = players.get(i);
 			MapCreator creator = new MapCreator();
@@ -148,13 +280,6 @@ public class Game {
 
 			}
 		} while (won == false);
-		totalWinners();
-
-		// for (Player winner : winners) {
-		// System.out.print("Player " + winner.getPlayerid() + " ");
-		// }
-		// System.out.println("won the game!");
-		sc.close();
 	}
 
 	public int checkTileForWater(int i) {
@@ -166,13 +291,13 @@ public class Game {
 
 			System.out
 					.println("You've ran out of land! Return to starting position (Refresh)");
-			GenerateHTMLFile(players.get(i));
+			// GenerateHTMLFile(players.get(i));
 		}
 		int ret = players.get(i).getTrail().size();
 		return ret;
 	}
 
-	public int totalWinners() {
+	public int DisplayWinners() {
 		int TotalWinners = winners.size();
 		do {
 			if (TotalWinners == 1) {
