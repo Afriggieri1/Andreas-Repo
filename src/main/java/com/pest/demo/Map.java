@@ -27,11 +27,11 @@ public abstract class Map {
         this.MapArray = array;
     }
 
-    public void setMapSize(int size) {
-        this.size = size;
+    public static void setMapSize(int s) {
+        size = s;
     }
 
-    public int getSize() {
+    public static  int getSize() {
         return size;
     }
 

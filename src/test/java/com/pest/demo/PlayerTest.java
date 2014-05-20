@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
 	Player p;
-	Map map;
-
+	//Map map;
+        Map map=null;
 	public PlayerTest() {
 	}
 
@@ -39,8 +39,8 @@ public class PlayerTest {
 
 			}
 		}
-
-		map = new Map(MapTemplate);
+                 map = SafeMap.getInstance(5);
+		map.MapArray=MapTemplate;
 	}
 
 	/**

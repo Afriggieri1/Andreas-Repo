@@ -1,4 +1,4 @@
-package com.pest.demo;
+/*package com.pest.demo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,25 +47,10 @@ public class GameTest {
 		assertEquals(expresult, result);
 	}
         
-        @Test
-	public void testAssignWater() {
-		int expresult = (16*16)/4;
-		Game newgame = new Game(16, 6,1);
-                game.CreateMap();
-                
-		int result = newgame.AssignWater();
-		assertEquals(expresult, result);
-	}
+        
         
          
-        @Test
-	public void testAssignDificulty() {
-		int expresult = (16*16)/4;
-		Game newgame = new Game(16, 6,1);
-                              
-		int result = newgame.assignDificulty();
-		assertEquals(expresult, result);
-	}
+        
         
         @Test
 	public void testGenerateHtmlFile(){	
@@ -107,5 +92,5 @@ public class GameTest {
             
             assertEquals(0,game1.checkTileForWater(0));
         }*/
-}
+//}
 
