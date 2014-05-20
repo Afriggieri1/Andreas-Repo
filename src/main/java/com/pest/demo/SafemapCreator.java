@@ -7,12 +7,12 @@
 package com.pest.demo;
 
 /**
- *
+ * 
  * @author Alastair
  */
 public class SafemapCreator extends MapCreator {
-    public Map createMap(int size){
-        Map map=SafeMap.getInstance(size);
-        return map;
-    }
+	public Map createMap(int size) {
+		Map map = SafeMap.getInstance(size);
+		return map;
+	}
 }

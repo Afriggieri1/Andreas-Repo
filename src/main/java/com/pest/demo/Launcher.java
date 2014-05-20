@@ -8,31 +8,32 @@ package com.pest.demo;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-
 /**
  * 
  * @author Andreas
  */
 public class Launcher {
-    static int noplayers;
-    static int size;
-    static int dificulty;
-    static int teamchoice;
-    static int teamno=0;
+	//number of players
+	static int noplayers;
+	//length of one side of map
+	static int size;
+	//hazardous of safe mode
+	static int difficulty;
+	//teams or individual
+	static int mode;
+	//amount of teams
+	static int teams_amount = 0;
+
 	/**
 	 * @param args
 	 *            the command line arguments
 	 */
 
 	public static void main(String[] args) {
-		
-		
-		ReadInputs();            
-				Game game = new Game(size, noplayers,dificulty);
-				game.startGame();
-			
-                        
-		
+
+		ReadInputs();
+		Game game = new Game(size, noplayers, difficulty);
+		game.startGame();
 
 	}
 
@@ -47,96 +48,105 @@ public class Launcher {
 	public static void ReadInputs() {
 		Scanner sc = new Scanner(System.in);
 		int players = 0;
-		boolean valid = false;
-                do{
-                    do {
-			try {
-				System.out.print("Enter Number of Players, between 2 and 8: ");
-				players = sc.nextInt();
-				valid = true;
-			} catch (InputMismatchException iomismatch) {
-				System.out.println("Invalid input!");
-				valid = false;
-			}
-                    } while (valid == false);
-                }while(CheckPlayers(players) == false);
-                
-                noplayers=players;
-                
-                
-                boolean valid1 = true;
+		boolean valid_players = false;
 		do {
-			do{
-			//System.out.print("Enter the map size nxn(max:50): ");
-			try {
-				System.out.print("Enter the map size nxn(max:50): ");
-				size = sc.nextInt();
-			 
-			} catch (InputMismatchException iomismatch) {
-				System.out.println("invalid input");
-				valid1 = false;
-				//sc.next();
-			}
-			}while(valid1==false);
-		} while (CheckMapsize(noplayers, size) != true);
-                
-                
-		 dificulty=1;
-		boolean valid2 = false;
-		do {
-			try {
-				System.out.print("Enter dificulty of the game 1 for safe and 2 for Hazardous : ");
-				dificulty = sc.nextInt();
-				valid2 = true;
-			} catch (InputMismatchException iomismatch) {
-				System.out.println("Invalid input!");
-				valid2 = false;
-			}
-		} while (valid2 == false);
-                
-                boolean valid3=false;
-                
-                do {
-			try {
-				System.out.print("Enter  1 for playing in teams and 2 for playing individualy : ");
-				teamchoice = sc.nextInt();
-				valid3 = true;
-			} catch (InputMismatchException iomismatch) {
-				System.out.println("Invalid input!");
-				valid3 = false;
-			}
-		} while (valid3 == false);
-                if(teamchoice==1){
-                    boolean valid4=false;
-                
-                do {
-			try {
-				System.out.print("Enter  number of teams : ");
-				teamno = sc.nextInt();
-                                if(teamno>noplayers){
-                                    System.out.println("\n Please enter a correct ammount of teams for the ammount of players");
-                                    valid=false;
-                                }
-                                else{
-                                    if(teamno==0){
-                                        System.out.println("\n please enter an number of teams greater than 0");
-                                        valid=false;
-                                    }
-                                    else{
-                                        valid4 = true;
-                                    }
-                                }
-				
-			} catch (InputMismatchException iomismatch) {
-				System.out.println("Invalid input!");
-				valid4 = false;
-			}
-		} while (valid4 == false);
-                }
-	}
-        
+			do {
+				try {
+					System.out
+							.print("Enter Number of Players, between 2 and 8: ");
+					players = sc.nextInt();
+					valid_players = true;
+				} catch (InputMismatchException iomismatch) {
+					System.out.println("Invalid input!");
+					valid_players = false;
+				}
+			} while (valid_players == false);
+		} while (CheckPlayers(players) == false);
 
-	
+		noplayers = players;
+
+		boolean valid_map = true;
+		do {
+			do {
+				// System.out.print("Enter the map size nxn(max:50): ");
+				try {
+					System.out
+							.print("Enter the length of one side of the map (max: 50): ");
+					size = sc.nextInt();
+					valid_map = true;
+
+				} catch (InputMismatchException iomismatch) {
+					System.out.println("invalid input!");
+					valid_map = false;
+					// sc.next();
+				}
+			} while (valid_map == false);
+		} while (CheckMapsize(noplayers, size) != true);
+
+		difficulty = 0;
+		boolean valid_difficulty = false;
+		do {
+			try {
+				System.out
+						.print("Enter the game difficulty: (1) for Safe or (2) for Hazardous: ");
+				difficulty = sc.nextInt();
+				if (difficulty < 1 || difficulty > 2){
+					valid_difficulty = false;
+				}
+				else valid_difficulty = true;
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("Invalid input!");
+				valid_difficulty = false;
+			}
+		} while (valid_difficulty == false);
+
+		boolean valid_mode = false;
+
+		do {
+			try {
+				System.out
+						.print("Enter (1) for playing in teams or (2) for playing individually: ");
+				mode = sc.nextInt();
+				if (mode < 1 || mode > 2){
+					valid_mode = false;
+				}
+				else valid_mode = true;
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("Invalid input!");
+				valid_mode = false;
+			}
+		} while (valid_mode == false);
+		if (mode == 1) {
+			boolean valid_teams = false;
+
+			do {
+				try {
+					System.out.print("Enter number of teams: ");
+					teams_amount = sc.nextInt();
+					if (teams_amount > noplayers) {
+						System.out
+								.println("\nCannot have more teams than players!");
+						valid_teams = false;
+					} else {
+						if (teams_amount <= 0) {
+							System.out
+									.println("\nPlease enter number of teams greater than 0");
+							valid_teams = false;
+						} else {
+							valid_teams = true;
+						}
+					}
+
+				} catch (InputMismatchException iomismatch) {
+					System.out.println("Invalid input!");
+					valid_teams = false;
+				}
+			} while (valid_teams == false);
+		}
+		else {
+			
+		}
+	}
 
 	public static Boolean CheckMapsize(int players, int mapsize) {
 

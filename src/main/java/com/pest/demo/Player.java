@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Andreas
  */
-public class Player {
+public class Player implements ObserverInterface{
 
     public final int PlayerID;//varaiable to hold the player id
     public Position CurrentPosition;// new instance of object position
@@ -85,5 +85,9 @@ public class Player {
         } catch (Exception e) {
             System.out.println("You cannot move there!");
         }
+    }
+    
+    public void Update(){
+    	
     }
 }

@@ -6,64 +6,66 @@
 package com.pest.demo;
 
 /**
- *
+ * 
  * @author Andreas
  */
 public abstract class Map {
-    //updates done for part 3
-    protected static Map instance=null;
-    
-   static int size;
-    protected static Tile[][] MapArray;
+	// updates done for part 3
+	protected static Map instance = null;
 
-    public Map(int size) {
-        this.size = size;
-        generate();
-        //this.MapArray = null;//create the array
-    }
+	static int size;
+	protected static Tile[][] MapArray;
 
-    /*public Map(Tile[][] array) {
-        this.size = array[0].length;
-        this.MapArray = array;
-    }*/
+	public Map(int size) {
+		this.size = size;
+		generate();
+		// this.MapArray = null;//create the array
+	}
 
-    public static void setMapSize(int s) {
-        size = s;
-    }
+	/*
+	 * public Map(Tile[][] array) { this.size = array[0].length; this.MapArray =
+	 * array; }
+	 */
 
-    public static  int getSize() {
-        return size;
-    }
+	public static void setMapSize(int s) {
+		size = s;
+	}
 
-    public static Tile getTile(int x, int y) {
-        return MapArray[x][y];
-    }
+	public static int getSize() {
+		return size;
+	}
 
-    public static Tile[][] getAllTiles() {
-        return MapArray;
-    }
+	public static Tile getTile(int x, int y) {
+		return MapArray[x][y];
+	}
 
-    public static Position startPosition() {
-        int x;
-        int y;
-        System.out.println("finding start");
+	public static Tile[][] getAllTiles() {
+		return MapArray;
+	}
 
-        boolean start = false;
-        do {
-            x = (int) (Math.random() * size);
-            y = (int) (Math.random() * size);
+	public static Position startPosition() {
+		int x;
+		int y;
+		System.out.println("finding start");
 
-            if ((MapArray[y][x].getType() == 'G') && (MapArray[y][x].getVisibility() == false)) {
+		boolean start = false;
+		do {
+			x = (int) (Math.random() * size);
+			y = (int) (Math.random() * size);
 
-                start = true;
+			if ((MapArray[y][x].getType() == 'G')
+					&& (MapArray[y][x].getVisibility() == false)) {
 
-                System.out.println(x);
-                System.out.println(y);
-                //System.out.println(Playermap.getTile(x, y).getVisibility());
-            }
-        } while (start == false);
-        return new Position(x, y, MapArray[y][x]);
-    }
-    public abstract void generate();
+				start = true;
+
+				System.out.println(x);
+				System.out.println(y);
+				// System.out.println(Playermap.getTile(x, y).getVisibility());
+			}
+		} while (start == false);
+		return new Position(x, y, MapArray[y][x]);
+	}
+
+	public abstract void generate();
 
 }

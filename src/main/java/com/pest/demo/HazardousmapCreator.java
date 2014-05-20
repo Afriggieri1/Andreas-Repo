@@ -7,12 +7,12 @@
 package com.pest.demo;
 
 /**
- *
+ * 
  * @author Alastair
  */
 public class HazardousmapCreator extends MapCreator {
-    public Map createMap(int size){
-        Map map=HazardousMap.getInstance(size);
-        return map;
-    }
+	public Map createMap(int size) {
+		Map map = HazardousMap.getInstance(size);
+		return map;
+	}
 }
