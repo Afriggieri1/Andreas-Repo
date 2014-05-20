@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 
+package com.pest.demo;
+
 /**
  *
  * @author Alastair
  */
-public class HazardousMap {
-    
+public class HazardousmapCreator extends MapCreator {
+    public Map createMap(int size){
+        Map map=HazardousMap.getInstance(size);
+        return map;
+    }
 }
