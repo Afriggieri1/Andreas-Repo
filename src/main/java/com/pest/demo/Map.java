@@ -22,10 +22,10 @@ public abstract class Map {
         //this.MapArray = null;//create the array
     }
 
-    public Map(Tile[][] array) {
+    /*public Map(Tile[][] array) {
         this.size = array[0].length;
         this.MapArray = array;
-    }
+    }*/
 
     public static void setMapSize(int s) {
         size = s;
