@@ -44,5 +44,10 @@ public class GameTest {
 		int result = newgame.CreatePlayers().size();
 		assertEquals(expresult, result);
 	}
+	
+	@Test
+	public void testStartGame(){
+		
+	}
 
 }
