@@ -1,4 +1,4 @@
-/*package com.pest.demo;
+package com.pest.demo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,14 +52,14 @@ public class GameTest {
          
         
         
-        @Test
+        /*@Test
 	public void testGenerateHtmlFile(){	
             Game game=new Game(16,2,1);
             Player p=new Player(1);
             
             File f1=game.GenerateHTMLFile(p);
             assertTrue(f1.exists());
-        }
+        }*/
         
          @Test
 	public void testtotalWinners(){	
@@ -92,5 +92,5 @@ public class GameTest {
             
             assertEquals(0,game1.checkTileForWater(0));
         }*/
-//}
+}
 
