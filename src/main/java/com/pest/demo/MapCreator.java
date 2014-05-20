@@ -28,8 +28,8 @@ public class MapCreator {
 	{
 		if (type == 1)
 			return new SafemapCreator(); 
-		/*else if (type == 2)
-			return new HazardousMapCreator();*/
+		else if (type == 2)
+			return new HazardousmapCreator();
 
 		return null;
 	}

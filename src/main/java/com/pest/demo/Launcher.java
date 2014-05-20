@@ -17,6 +17,8 @@ public class Launcher {
     static int noplayers;
     static int size;
     static int dificulty;
+    static int teamchoice;
+    static int teamno=0;
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -91,6 +93,46 @@ public class Launcher {
 				valid2 = false;
 			}
 		} while (valid2 == false);
+                
+                boolean valid3=false;
+                
+                do {
+			try {
+				System.out.print("Enter  1 for playing in teams and 2 for playing individualy : ");
+				teamchoice = sc.nextInt();
+				valid3 = true;
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("Invalid input!");
+				valid3 = false;
+			}
+		} while (valid3 == false);
+                if(teamchoice==1){
+                    boolean valid4=false;
+                
+                do {
+			try {
+				System.out.print("Enter  number of teams : ");
+				teamno = sc.nextInt();
+                                if(teamno>noplayers){
+                                    System.out.println("\n Please enter a correct ammount of teams for the ammount of players");
+                                    valid=false;
+                                }
+                                else{
+                                    if(teamno==0){
+                                        System.out.println("\n please enter an number of teams greater than 0");
+                                        valid=false;
+                                    }
+                                    else{
+                                        valid4 = true;
+                                    }
+                                }
+				
+			} catch (InputMismatchException iomismatch) {
+				System.out.println("Invalid input!");
+				valid4 = false;
+			}
+		} while (valid4 == false);
+                }
 	}
         
 
