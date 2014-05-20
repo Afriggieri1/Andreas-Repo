@@ -8,11 +8,11 @@ import java.util.*;
 
 public class GameTest {
 	Game game;
-
+Map map=null;
 	@Before
 	public void setUp() {
 		game = new Game(2, 5,1);
-
+                map = SafeMap.getInstance(5);
 	}
 
 	@Test
@@ -52,14 +52,14 @@ public class GameTest {
          
         
         
-        /*@Test
+        @Test
 	public void testGenerateHtmlFile(){	
-            Game game=new Game(16,2,1);
+            //Game game=new Game(16,2,1);
             Player p=new Player(1);
             
             File f1=game.GenerateHTMLFile(p);
             assertTrue(f1.exists());
-        }*/
+        }
         
          @Test
 	public void testtotalWinners(){	
