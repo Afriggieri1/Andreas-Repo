@@ -19,17 +19,21 @@ public class Game {
 
     int SizeOfMap;
     int NumOfPlayers;
+    int diffic;
     Map DefaultMap;
     ArrayList<Player> players = new ArrayList<Player>(); // Array list hoding all the players
     //ArrayList<Map> maps = new ArrayList<>(); //Array list holding all the maps
     ArrayList<Player> winners = new ArrayList<Player>();
     boolean won = false;
+    //Tile[][] MapTemplate;
 
-    public Game(int size, int players) {
+    public Game(int size, int players,int d) {
         this.SizeOfMap = size;
         this.NumOfPlayers = players;
         this.players = CreatePlayers();
-        this.DefaultMap = CreateMap();
+       // this.DefaultMap = CreateMap();
+        this.diffic=d;
+       
     }
 
     public ArrayList<Player> CreatePlayers() {
@@ -40,10 +44,10 @@ public class Game {
         return players;
     }
 
-    private Map CreateMap() {
+    /*public Map CreateMap() {
 
-        Tile[][] MapTemplate = new Tile[SizeOfMap][SizeOfMap];
-        int TotalTiles = SizeOfMap * SizeOfMap;
+         MapTemplate= new Tile[SizeOfMap][SizeOfMap];
+        
 
         //assign grass
         for (int j = 0; j < SizeOfMap; j++) {
@@ -53,28 +57,16 @@ public class Game {
 
             }
         }
-
-        //assign water
-        int WaterTiles = TotalTiles / 4;
-
-        int count = 0;
-        do {
-            int xwater = (int) (Math.random() * SizeOfMap);
-            int ywater = (int) (Math.random() * SizeOfMap);
-            if (MapTemplate[ywater][xwater].getType() != 'T' && MapTemplate[ywater][ywater].getType() != 'W') {
-                MapTemplate[ywater][xwater].setType('W');
-                count++;
-            }
-        } while (count <= WaterTiles);
-
-        //assign treasure
         int TreasureX = (int) (Math.random() * SizeOfMap);
         int TreasureY = (int) (Math.random() * SizeOfMap);
-
-        System.out.println(TreasureX);
-        System.out.println(TreasureY);
-
         MapTemplate[TreasureY][TreasureX].setType('T');
+        
+        AssignWater();      
+
+        //System.out.println(TreasureX);
+        //System.out.println(TreasureY);
+
+       
 
         Map newMap = new Map(MapTemplate);
 
@@ -82,6 +74,7 @@ public class Game {
         // players.get(i).setMap(new Map(MapTemplate.clone()));
         //maps.add(players.get(i).getMap());
         // }
+        //Din kolla trid titlaq thawn taht
         for (int i = 0; i < SizeOfMap; i++) {
             for (int j = 0; j < SizeOfMap; j++) {
                 System.out.print(MapTemplate[i][j].getType() + "  ");
@@ -90,14 +83,49 @@ public class Game {
         }
         return newMap;
     }
-
+     
+//assign water
+    public int AssignWater(){
+        int TotalTiles = assignDificulty();
+       
+        System.out.println("TotalTiles= "+TotalTiles);
+        int count = 0;
+        do {
+            int xwater = (int) (Math.random() * SizeOfMap);
+            int ywater = (int) (Math.random() * SizeOfMap);
+            if (MapTemplate[ywater][xwater].getType() != 'T' && MapTemplate[ywater][ywater].getType() != 'W') {
+                MapTemplate[ywater][xwater].setType('W');
+                count++;
+            }
+        } while (count <= TotalTiles);
+        System.out.println("Water are set");
+        return TotalTiles;
+    }
+    public int assignDificulty(){
+        int TotalTiles = SizeOfMap * SizeOfMap;
+        
+        if(diffic == 1){
+            int WaterTiles = TotalTiles / 4;
+            return WaterTiles;
+        }
+        else{
+           double WaterTiles1 = TotalTiles /4 ;
+           double WaterTiles2= TotalTiles *0.35 ;
+           
+           int WaterTiles=(int)(WaterTiles1 + (Math.random() * (WaterTiles2 - WaterTiles1)));
+            return WaterTiles;
+        }
+        //return 1;
+    }*/
+  
     public void startGame() {
         Scanner sc = new Scanner(System.in);
         //set starting positions for all players
         for (int i = 0; i < players.size(); i++) {
             Player AlterPlayer = players.get(i);
-
-            Position startPos = this.DefaultMap.startPosition();
+            MapCreator creator = new MapCreator();
+	     creator.createMap(diffic, SizeOfMap);
+            Position startPos = Map.startPosition();
             AlterPlayer.setPosition(startPos);
             GenerateHTMLFile(AlterPlayer);
         }
@@ -106,15 +134,7 @@ public class Game {
             //start the transitions
             for (int i = 0; i < players.size(); i++) {
                 //each player chooses where to move
-                if (isWater(players.get(i).getPosition()) == true) {
-                    //check for water
-                    Position startPos = players.get(i).getTrail().get(0);
-                    players.get(i).ResetTrail();
-                    players.get(i).setPosition(startPos);
-
-                    System.out.println("You've ran out of land! Return to starting position (Refresh)");
-                    GenerateHTMLFile(players.get(i));
-                }
+                checkTileForWater(i);
 
                 System.out.println("Player " + players.get(i).getPlayerid() + ", please choose your next move ([U]p, [D]own, [L]eft or [R]ight)");
                 String turn=sc.next();
@@ -141,8 +161,29 @@ public class Game {
 
             }
         } while (won == false);
+        totalWinners();
+       
+        //for (Player winner : winners) {
+        //    System.out.print("Player " + winner.getPlayerid() + " ");
+        //}
+        // System.out.println("won the game!");
+        sc.close();
+    }
+    public int checkTileForWater(int i){
+        if (isWater(players.get(i).getPosition()) == true) {
+                    //check for water
+                    Position startPos = players.get(i).getTrail().get(0);
+                    players.get(i).ResetTrail();
+                    players.get(i).setPosition(startPos);
 
-        int TotalWinners = winners.size();
+                    System.out.println("You've ran out of land! Return to starting position (Refresh)");
+                    GenerateHTMLFile(players.get(i));
+                }
+        int ret=players.get(i).getTrail().size();
+        return ret;
+    }
+    public int totalWinners(){
+         int TotalWinners = winners.size();
         do {
             if (TotalWinners == 1) {
                 System.out.println("Player " + winners.get(0).getPlayerid() + " has won the game!");
@@ -158,11 +199,7 @@ public class Game {
                 }
             }
         } while (TotalWinners > 0);
-        //for (Player winner : winners) {
-        //    System.out.print("Player " + winner.getPlayerid() + " ");
-        //}
-        // System.out.println("won the game!");
-        sc.close();
+        return TotalWinners;
     }
 
     public boolean isWater(Position pos) {
@@ -173,7 +210,7 @@ public class Game {
         return pos.getTile().getType() == 'T';
     }
 
-    private void GenerateHTMLFile(Player CurrentPlayer) {
+    public File GenerateHTMLFile(Player CurrentPlayer) {
 
         for (int i = 0; i < CurrentPlayer.getTrail().size(); i++) {
             Position CurrentTile = CurrentPlayer.getTrail().get(i);
@@ -189,27 +226,27 @@ public class Game {
         for (int i = 0; i < SizeOfMap; i++) {
             code += "<tr>";
             for (int j = 0; j < SizeOfMap; j++) {
-                if (this.DefaultMap.getTile(i, j).getVisibility() == false) {
+                if (Map.getTile(i, j).getVisibility() == false) {
                     code += "<td width='50' height='50'> </td>\n";
                 } else {
-                    if (this.DefaultMap.getTile(i, j).getType() == 'T') {
+                    if (Map.getTile(i, j).getType() == 'T') {
                         //tile contains treasure
                         code += "<TD BGCOLOR=\"#ffff00\" width='50' height='50'align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"Happy_smiley_face.png\" height='30' width='30'></img>";
                         }
                     }
-                    if (this.DefaultMap.getTile(i, j).getType() == 'G') {
+                    if (Map.getTile(i, j).getType() == 'G') {
                         //tile contains grass
                         code += "<TD BGCOLOR=\"#00ff00\" width='50' height='50' align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"smiley.png\" height='30' width='30'></img>";
                         }
                     }
-                    if (this.DefaultMap.getTile(i, j).getType() == 'W') {
+                    if (Map.getTile(i, j).getType() == 'W') {
                         //tile contains water
                         code += "<TD BGCOLOR=\"#0000ff\" width='50' height='50'align=\"center\">\n";
-                        if (this.DefaultMap.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
+                        if (Map.getTile(i, j) == CurrentPlayer.getPosition().getTile()) {
                             code += "<img src=\"sad.png\" height='30' width='30'></img>";
                         }
                     }
@@ -220,9 +257,9 @@ public class Game {
         }
 
         code += "</table></body></html>";
-
+    File map= new File("map_player_" + CurrentPlayer.getPlayerid() + ".html");
         try {
-            File map = new File("map_player_" + CurrentPlayer.getPlayerid() + ".html");
+            
             map.createNewFile();
             map.delete();
             map.createNewFile();
@@ -243,5 +280,6 @@ public class Game {
             Position CurrentTile = CurrentPlayer.getTrail().get(i);
             CurrentTile.getTile().setVisibility(false);
         }
+        return map;
     }
 }

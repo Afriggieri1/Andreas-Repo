@@ -17,7 +17,11 @@ import static org.junit.Assert.*;
  */
 public class MapTest {
     
-    
+    Map map=null;
+    public void before(){
+        System.out.println(" dahal1");
+      map = SafeMap.getInstance(5);
+}
 
     /**
      * Test of setMapSize method, of class Map.
@@ -26,9 +30,9 @@ public class MapTest {
     public void testSetMapSize() {
         System.out.println("setMapSize");
         //int size = 0;
-        Map instance =new Map(5);
-        instance.setMapSize(6);
-        assertEquals(6,instance.getSize());
+       map.setMapSize(6);
+       int x=map.size;
+        assertEquals(6,x);
     }
 
     /**
@@ -37,9 +41,9 @@ public class MapTest {
     @Test
     public void testGetSize() {
         System.out.println("getSize");
-        Map instance = new Map(5);
+        map.setMapSize(5);
         int expResult = 5;
-        int result = instance.getSize();
+        int result = map.getSize();
         assertEquals(expResult, result);
        
     }
@@ -59,9 +63,9 @@ public class MapTest {
                 store[i][j]=newtile;
             }
         }
-        Map instance = new Map(store);
+        map.MapArray=store;
         Tile expResult = newtile;
-        Tile result = instance.getTile(x, y);
+        Tile result = map.getTile(x, y);
         assertEquals(expResult, result);
         
     }
@@ -79,9 +83,9 @@ public class MapTest {
                 store[i][j]=newtile;
             }
         }
-        Map instance = new Map(store);
+        map.MapArray=store;
         Tile[][] expResult = store;
-        Tile[][] result = instance.getAllTiles();
+        Tile[][] result = map.getAllTiles();
         assertArrayEquals(expResult, result);
         
     }
@@ -98,7 +102,7 @@ public class MapTest {
 			}
 		}
 
-		Map map = new Map(MapTemplate);
+		map.MapArray=MapTemplate;
 		
 		MapTemplate[2][2].setType('G');
 		

@@ -9,46 +9,49 @@ package com.pest.demo;
  *
  * @author Andreas
  */
-public class Map {
-
-    int MapSize;
-    Tile[][] MapArray;
+public abstract class Map {
+    //updates done for part 3
+    protected static Map instance=null;
+    
+   static int size;
+    protected static Tile[][] MapArray;
 
     public Map(int size) {
-        this.MapSize = size;
-        this.MapArray = null;//create the array
+        this.size = size;
+        generate();
+        //this.MapArray = null;//create the array
     }
 
-    public Map(Tile[][] array) {
-        this.MapSize = array[0].length;
+    /*public Map(Tile[][] array) {
+        this.size = array[0].length;
         this.MapArray = array;
+    }*/
+
+    public static void setMapSize(int s) {
+        size = s;
     }
 
-    public void setMapSize(int size) {
-        this.MapSize = size;
+    public static  int getSize() {
+        return size;
     }
 
-    public int getSize() {
-        return MapSize;
-    }
-
-    public Tile getTile(int x, int y) {
+    public static Tile getTile(int x, int y) {
         return MapArray[x][y];
     }
 
-    public Tile[][] getAllTiles() {
+    public static Tile[][] getAllTiles() {
         return MapArray;
     }
 
-    public Position startPosition() {
+    public static Position startPosition() {
         int x;
         int y;
         System.out.println("finding start");
 
         boolean start = false;
         do {
-            x = (int) (Math.random() * MapSize);
-            y = (int) (Math.random() * MapSize);
+            x = (int) (Math.random() * size);
+            y = (int) (Math.random() * size);
 
             if ((MapArray[y][x].getType() == 'G') && (MapArray[y][x].getVisibility() == false)) {
 
@@ -61,5 +64,6 @@ public class Map {
         } while (start == false);
         return new Position(x, y, MapArray[y][x]);
     }
+    public abstract void generate();
 
 }
