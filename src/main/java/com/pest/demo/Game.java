@@ -219,9 +219,9 @@ public class Game {
 
 				// if won, store winners
 				if (isTreasure(ToPlay.getPosition()) == true) {
-					for (int j = 0; j < teams.get(i).getPlayers().size(); j++) {
-						winners.add(teams.get(i).getPlayers().get(j));
-					}
+					
+						winners=teams.get(i).getPlayers();
+					
 					won = true;
 				}
 

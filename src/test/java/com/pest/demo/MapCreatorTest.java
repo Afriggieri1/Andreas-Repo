@@ -17,9 +17,29 @@ import java.lang.reflect.Field;
  *
  * @author Alastair
  */
-/*public class MapCreatorTest {
-
-	Game game = null;
+public class MapCreatorTest {
+          Map m;
+          
+          MapCreator creator;
+          @Test
+	public void creatorTestWithSafemap() {
+		creator = new MapCreator();
+		m = creator.createMap(1, 9);
+                int expresult=Map.size;
+		
+		assertEquals(expresult, m.size);
+		// assertEquals(true, g.generate());
+	}
+        @Test
+	public void creatorTestWithHazardousmap() {
+		creator = new MapCreator();
+		m = creator.createMap(2, 9);
+                int expresult=Map.size;
+		
+		assertEquals(expresult, m.size);
+		// assertEquals(true, g.generate());
+	}
+	/*Game game = null;
 	Map map = null;
 
 	@Before
@@ -57,5 +77,5 @@ import java.lang.reflect.Field;
 		// check that 2nd instance of Map, wasn't created
 		//assertNull(map);
 
-	}	
-}*/
+	}*/	
+}
