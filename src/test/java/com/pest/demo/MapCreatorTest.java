@@ -28,12 +28,13 @@ public class MapCreatorTest {
 		creator = new MapCreator();
 		m = creator.createMap(1, 9);
                 int expresult=Map.size;
-		
+		//Map.instance=null;
 		assertEquals(expresult, m.size);
 		// assertEquals(true, g.generate());
 	}
         @Test
 	public void creatorTestWithHazardousmap() {
+            //Map.instance=null;
 		creator1 = new MapCreator();
 		m1 = creator1.createMap(2, 9);
                 int expresult=Map.size;
