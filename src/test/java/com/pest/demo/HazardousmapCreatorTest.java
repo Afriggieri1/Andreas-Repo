@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class HazardousmapCreatorTest {
     
         
-        /* Map m1;
+         Map m1=null;
           
           
           MapCreator creator1;
@@ -34,6 +34,6 @@ public class HazardousmapCreatorTest {
 		
 		assertEquals(expresult, m1.size);
 		// assertEquals(true, g.generate());
-	}*/
+	}
     
 }
