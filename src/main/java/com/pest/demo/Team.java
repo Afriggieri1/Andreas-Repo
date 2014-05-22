@@ -37,6 +37,10 @@ public class Team implements SubjectInterface {
 		trail.add(currentpos);
 	}
 	
+	public ArrayList<Position> getTrail(){
+		return this.trail;
+	}
+	
 	public void ClearPlayers(){
 		this.players.clear();
 	}
@@ -44,6 +48,10 @@ public class Team implements SubjectInterface {
 	public void setTrail(ArrayList<Position> newTrail) {
         this.trail = newTrail;
     }
+	
+	public void AddPosition(Position p){
+		this.trail.add(p);
+	}
 	
 	public Player SelectPlayer(){
 		if (NextPlayerToPlay > players.size()-1)

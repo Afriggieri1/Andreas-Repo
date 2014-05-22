@@ -151,10 +151,20 @@ public class Game {
 
 		for (int i = 0; i < teams.size(); i++) {
 
+			System.out.println("Team: "+(i+1));
 			MapCreator creator = new MapCreator();
 			creator.createMap(difficulty, SizeOfMap);
-			Position startPos = Map.startPosition();
-			teams.get(i).setPosition(startPos);
+			
+			for (int j = 0;j<teams.get(i).getPlayers().size();j++){
+				System.out.println("\nPlayer "+teams.get(i).getPlayers().get(j).getPlayerid());
+				Position startPos = Map.startPosition();
+				teams.get(i).getPlayers().get(j).setPosition(startPos);
+				
+				teams.get(i).AddPosition(startPos);
+			}
+			
+
+			//teams.get(i).setPosition(startPos);
 			teams.get(i).NotifyPlayers();
 			System.out.println("Number of players in team: "
 					+ teams.get(i).getPlayers().size());
@@ -172,7 +182,8 @@ public class Game {
 			for (int i = 0; i < teams.size(); i++) {
 				// each player chooses where to move
 				Player ToPlay = teams.get(i).SelectPlayer();
-				if (checkTileForWater(ToPlay.getPlayerid() - 1) == 1) {
+				if (checkTileForWater(ToPlay.getPlayerid() - 1) != teams.get(i).getTrail().size()) {
+					System.out.println("WATER PROCEDURE");
 					teams.get(i).setTrail(ToPlay.getTrail());
 					teams.get(i).NotifyPlayers();
 
@@ -285,6 +296,7 @@ public class Game {
 	public int checkTileForWater(int i) {
 		if (isWater(players.get(i).getPosition()) == true) {
 			// check for water
+			System.out.println("Water tile detected");
 			Position startPos = players.get(i).getTrail().get(0);
 			players.get(i).ResetTrail();
 			players.get(i).setPosition(startPos);
@@ -294,6 +306,7 @@ public class Game {
 			// GenerateHTMLFile(players.get(i));
 		}
 		int ret = players.get(i).getTrail().size();
+		System.out.println(ret);
 		return ret;
 	}
 

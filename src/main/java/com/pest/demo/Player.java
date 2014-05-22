@@ -16,13 +16,17 @@ public class Player implements ObserverInterface{
     public final int PlayerID;//varaiable to hold the player id
     public Position CurrentPosition;// new instance of object position
     //public Map PlayerMap;// variable to store the player's map
+    //contains the trail of the player and other players in the team
     public ArrayList<Position> trail;
+    //contains the trail of the player only
+    private ArrayList<Position> PlayerTrail;
 
     public Player(int ID) {//constructor with parameters for this class
         this.PlayerID = ID;
         //this.PlayerMap = null;
         this.CurrentPosition = null;
         trail = new ArrayList<Position>();
+        PlayerTrail = new ArrayList<Position>();
     }
 
     public int getPlayerid() {
@@ -37,22 +41,28 @@ public class Player implements ObserverInterface{
     public void setPosition(Position currentpos) {
         this.CurrentPosition = currentpos;
         trail.add(currentpos);
+        PlayerTrail.add(currentpos);
     }
 
     public ArrayList<Position> getTrail() {
         return trail;
     }
 
-    public void setTrail(ArrayList<Position> newTrail) {
-        this.trail = newTrail;
-    }
+    //public void setTrail(ArrayList<Position> newTrail) {
+      //  this.trail = newTrail;
+    //}
 
     public Position getPosition() {
         return this.CurrentPosition;
     }
 
     public void ResetTrail() {
-        this.trail.clear();
+        for (int i = 0; i<this.PlayerTrail.size();i++){
+        	
+        			int index = trail.indexOf(this.PlayerTrail.get(i));
+        			this.trail.remove(index);
+        }
+        this.PlayerTrail.clear();
     }
 
     public void move(char direction, Map PlayerMap) {
@@ -89,6 +99,6 @@ public class Player implements ObserverInterface{
     
     public void Update(ArrayList<Position> t){
     	this.trail = t;
-    	this.CurrentPosition = trail.get(trail.size()-1);
+    	//this.CurrentPosition = trail.get(trail.size()-1);
     }
 }

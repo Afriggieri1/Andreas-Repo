@@ -91,7 +91,7 @@ public class PlayerTest {
 	/**
 	 * Test of setTrail method, of class Player.
 	 */
-	@Test
+	/*@Test
 	public void testSetTrail() {
 		System.out.println("setTrail");
 		ArrayList<Position> newTrail = new ArrayList<Position>();
@@ -99,7 +99,7 @@ public class PlayerTest {
 		newTrail.add(newPos);
 		p.setTrail(newTrail);
 		assertEquals(newTrail, p.getTrail());
-	}
+	}*/
 
 	/**
 	 * Test of ResetTrail method, of class Player.
