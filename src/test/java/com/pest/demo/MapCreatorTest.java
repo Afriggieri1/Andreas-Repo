@@ -37,7 +37,7 @@ public class MapCreatorTest {
           @Before
 	public void setup() {
 		creator = new MapCreator();
-		m = creator.createMap(1, 5);
+		m = creator.createMap(2, 5);
 		
 		//m.size = 5;
                 assertEquals(Map.size, m.size);
