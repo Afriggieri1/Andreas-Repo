@@ -32,7 +32,7 @@ public class HazardousmapCreatorTest {
 		hmap = new HazardousmapCreator();
 		m1 = hmap.createMap(2, 9);
                 int expresult=Map.size;
-		
+		Map.startPosition();
 		assertEquals(expresult, m1.size);
 		// assertEquals(true, g.generate());
 	}
