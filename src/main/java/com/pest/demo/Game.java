@@ -109,8 +109,10 @@ public class Game {
 
 		// set starting positions for all players
 		if (NumOfTeams == 0) {
+			System.out.println("Individual Play");
 			IndividualPlay();
 		} else {
+			System.out.println("Team Play");
 			TeamPlay();
 		}
 
@@ -155,16 +157,16 @@ public class Game {
 			MapCreator creator = new MapCreator();
 			creator.createMap(difficulty, SizeOfMap);
 			
-			for (int j = 0;j<teams.get(i).getPlayers().size();j++){
-				System.out.println("\nPlayer "+teams.get(i).getPlayers().get(j).getPlayerid());
-				Position startPos = Map.startPosition();
-				teams.get(i).getPlayers().get(j).setPosition(startPos);
+			//for (int j = 0;j<teams.get(i).getPlayers().size();j++){
+				//System.out.println("\nPlayer "+teams.get(i).getPlayers().get(j).getPlayerid());
+				//Position startPos = Map.startPosition();
+				//teams.get(i).getPlayers().get(j).setPosition(startPos);
 				
-				teams.get(i).AddPosition(startPos);
-			}
-			
+			//	teams.get(i).AddPosition(startPos);
+			//}
+			Position startPos = Map.startPosition();
 
-			//teams.get(i).setPosition(startPos);
+			teams.get(i).setPosition(startPos);
 			teams.get(i).NotifyPlayers();
 			System.out.println("Number of players in team: "
 					+ teams.get(i).getPlayers().size());
@@ -182,7 +184,8 @@ public class Game {
 			for (int i = 0; i < teams.size(); i++) {
 				// each player chooses where to move
 				Player ToPlay = teams.get(i).SelectPlayer();
-				if (checkTileForWater(ToPlay.getPlayerid() - 1) != teams.get(i).getTrail().size()) {
+				int trail_size = ToPlay.getTrail().size();
+				if (checkTileForWater(ToPlay.getPlayerid() - 1) < trail_size) {
 					System.out.println("WATER PROCEDURE");
 					teams.get(i).setTrail(ToPlay.getTrail());
 					teams.get(i).NotifyPlayers();
@@ -303,7 +306,7 @@ public class Game {
 
 			System.out
 					.println("You've ran out of land! Return to starting position (Refresh)");
-			// GenerateHTMLFile(players.get(i));
+			GenerateHTMLFile(players.get(i));
 		}
 		int ret = players.get(i).getTrail().size();
 		System.out.println(ret);

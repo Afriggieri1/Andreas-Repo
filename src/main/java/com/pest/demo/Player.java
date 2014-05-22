@@ -8,97 +8,93 @@ package com.pest.demo;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author Andreas
  */
-public class Player implements ObserverInterface{
+public class Player implements ObserverInterface {
 
-    public final int PlayerID;//varaiable to hold the player id
-    public Position CurrentPosition;// new instance of object position
-    //public Map PlayerMap;// variable to store the player's map
-    //contains the trail of the player and other players in the team
-    public ArrayList<Position> trail;
-    //contains the trail of the player only
-    private ArrayList<Position> PlayerTrail;
+	public final int PlayerID;// varaiable to hold the player id
+	public Position CurrentPosition;// new instance of object position
+	// public Map PlayerMap;// variable to store the player's map
+	// contains the trail of the player and other players in the team
+	public ArrayList<Position> trail;
+	// contains the trail of the player only
+	private ArrayList<Position> PlayerTrail;
 
-    public Player(int ID) {//constructor with parameters for this class
-        this.PlayerID = ID;
-        //this.PlayerMap = null;
-        this.CurrentPosition = null;
-        trail = new ArrayList<Position>();
-        PlayerTrail = new ArrayList<Position>();
-    }
+	public Player(int ID) {// constructor with parameters for this class
+		this.PlayerID = ID;
+		// this.PlayerMap = null;
+		this.CurrentPosition = null;
+		trail = new ArrayList<Position>();
+	}
 
-    public int getPlayerid() {
-        return this.PlayerID;
-    }
+	public int getPlayerid() {
+		return this.PlayerID;
+	}
 
-    /*
-     *   this method set the position of a particular player
-     *   @param int x,int y
-     *   @return boolean
-     */
-    public void setPosition(Position currentpos) {
-        this.CurrentPosition = currentpos;
-        trail.add(currentpos);
-        PlayerTrail.add(currentpos);
-    }
+	/*
+	 * this method set the position of a particular player
+	 * 
+	 * @param int x,int y
+	 * 
+	 * @return boolean
+	 */
+	public void setPosition(Position currentpos) {
+		this.CurrentPosition = currentpos;
+		trail.add(currentpos);
+	}
 
-    public ArrayList<Position> getTrail() {
-        return trail;
-    }
+	public ArrayList<Position> getTrail() {
+		return trail;
+	}
 
-    //public void setTrail(ArrayList<Position> newTrail) {
-      //  this.trail = newTrail;
-    //}
+	// public void setTrail(ArrayList<Position> newTrail) {
+	// this.trail = newTrail;
+	// }
 
-    public Position getPosition() {
-        return this.CurrentPosition;
-    }
+	public Position getPosition() {
+		return this.CurrentPosition;
+	}
 
-    public void ResetTrail() {
-        for (int i = 0; i<this.PlayerTrail.size();i++){
-        	
-        			int index = trail.indexOf(this.PlayerTrail.get(i));
-        			this.trail.remove(index);
-        }
-        this.PlayerTrail.clear();
-    }
+	public void ResetTrail() {
+		this.trail.clear();
+	}
 
-    public void move(char direction, Map PlayerMap) {
-        int x = CurrentPosition.getX();
-        int y = CurrentPosition.getY();
+	public void move(char direction, Map PlayerMap) {
+		int x = CurrentPosition.getX();
+		int y = CurrentPosition.getY();
 
-        try {
-            switch (direction) {
-                case 'U':
-                case 'u':
-                    setPosition(new Position(x, y - 1, PlayerMap.getTile(y - 1, x)));
-                    break;
+		try {
+			switch (direction) {
+			case 'U':
+			case 'u':
+				setPosition(new Position(x, y - 1, PlayerMap.getTile(y - 1, x)));
+				break;
 
-                case 'D':
-                case 'd':
-                    setPosition(new Position(x, y + 1, PlayerMap.getTile(y + 1, x)));
-                    break;
+			case 'D':
+			case 'd':
+				setPosition(new Position(x, y + 1, PlayerMap.getTile(y + 1, x)));
+				break;
 
-                case 'L':
-                case 'l':
-                    setPosition(new Position(x - 1, y, PlayerMap.getTile(y, x - 1)));
-                    break;
+			case 'L':
+			case 'l':
+				setPosition(new Position(x - 1, y, PlayerMap.getTile(y, x - 1)));
+				break;
 
-                case 'R':
-                case 'r':
-                    setPosition(new Position(x + 1, y, PlayerMap.getTile(y, x + 1)));
-                    break;
-            }
+			case 'R':
+			case 'r':
+				setPosition(new Position(x + 1, y, PlayerMap.getTile(y, x + 1)));
+				break;
+			}
 
-        } catch (Exception e) {
-            System.out.println("You cannot move there!");
-        }
-    }
-    
-    public void Update(ArrayList<Position> t){
-    	this.trail = t;
-    	//this.CurrentPosition = trail.get(trail.size()-1);
-    }
+		} catch (Exception e) {
+			System.out.println("You cannot move there!");
+		}
+	}
+
+	public void Update(ArrayList<Position> t) {
+		this.trail = null;
+		this.trail = t;
+		// this.CurrentPosition = trail.get(trail.size()-1);
+	}
 }
