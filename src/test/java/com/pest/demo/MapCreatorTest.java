@@ -19,8 +19,10 @@ import java.lang.reflect.Field;
  */
 public class MapCreatorTest {
           Map m;
+          Map m1;
           
           MapCreator creator;
+          MapCreator creator1;
           @Test
 	public void creatorTestWithSafemap() {
 		creator = new MapCreator();
@@ -32,11 +34,11 @@ public class MapCreatorTest {
 	}
         @Test
 	public void creatorTestWithHazardousmap() {
-		creator = new MapCreator();
-		m = creator.createMap(2, 9);
+		creator1 = new MapCreator();
+		m1 = creator1.createMap(2, 9);
                 int expresult=Map.size;
 		
-		assertEquals(expresult, m.size);
+		assertEquals(expresult, m1.size);
 		// assertEquals(true, g.generate());
 	}
 	/*Game game = null;
