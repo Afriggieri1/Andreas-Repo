@@ -20,20 +20,21 @@ import static org.junit.Assert.*;
 public class HazardousmapCreatorTest {
     
         
-         /*Map m1=null;
+         Map m1=null;
           
           
           MapCreator creator1;
+         HazardousmapCreator hmap;
          
         @Test
 	public void creatorTestWithHazardousmap() {
              //Map.instance=null;
-		creator1 = new MapCreator();
-		m1 = creator1.createMap(2, 9);
+		hmap = new HazardousmapCreator();
+		m1 = hmap.createMap(2, 9);
                 int expresult=Map.size;
 		
 		assertEquals(expresult, m1.size);
 		// assertEquals(true, g.generate());
-	}*/
+	}
     
 }
