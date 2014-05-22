@@ -18,8 +18,8 @@ import java.lang.reflect.Field;
  * @author Alastair
  */
 public class MapCreatorTest {
-          Map m;
-          Map m1;
+          Map m=null;
+          Map m1=null;
           
           MapCreator creator;
           MapCreator creator1;
