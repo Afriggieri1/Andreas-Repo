@@ -47,9 +47,9 @@ public class MapCreatorTest {
         
         @Test
 	public void generate() {
-		m.size = 5;
-		m = creator.createMap(2,5);
-		// assertEquals(true, m.generate());
+		//m.size = 6;
+		m = creator.createMap(2,4);
+		 assertEquals(4, m.size);
 	}
         /*@Test
 	public void creatorTestWithSafemap() {

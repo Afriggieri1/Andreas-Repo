@@ -19,7 +19,7 @@ public class SafeMap extends Map {
 	}
 
 	public static Map getInstance(int size) {
-		if (Map.instance == null) {
+		if (Map.instance == null||!(Map.instance instanceof SafeMap)) {
 			instance = new SafeMap(size);
 		}
 		return Map.instance;

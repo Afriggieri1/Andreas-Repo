@@ -21,7 +21,7 @@ public class HazardousMap extends Map {
 	}
 
 	public static Map getInstance(int size) {
-		if (Map.instance == null) {
+		if (Map.instance == null||!(Map.instance instanceof HazardousMap)) {
 			instance = new HazardousMap(size);
 		}
 		return Map.instance;
