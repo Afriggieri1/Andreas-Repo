@@ -32,10 +32,10 @@ public class Team implements SubjectInterface {
 		return players;
 	}
 
-	public void setPosition(Position currentpos) {
+	//public void setPosition(Position currentpos) {
 		// this.CurrentPosition = currentpos;
-		trail.add(currentpos);
-	}
+		//trail.add(currentpos);
+	//}
 	
 	public ArrayList<Position> getTrail(){
 		return this.trail;
@@ -50,7 +50,9 @@ public class Team implements SubjectInterface {
     }
 	
 	public void AddPosition(Position p){
-		this.trail.add(p);
+		if (!this.trail.contains(p)){
+			trail.add(p);
+			}
 	}
 	
 	public Player SelectPlayer(){

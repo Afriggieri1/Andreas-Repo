@@ -26,6 +26,7 @@ public class Player implements ObserverInterface {
 		// this.PlayerMap = null;
 		this.CurrentPosition = null;
 		trail = new ArrayList<Position>();
+		PlayerTrail = new ArrayList<Position>();
 	}
 
 	public int getPlayerid() {
@@ -41,7 +42,10 @@ public class Player implements ObserverInterface {
 	 */
 	public void setPosition(Position currentpos) {
 		this.CurrentPosition = currentpos;
-		trail.add(currentpos);
+		if (!this.trail.contains(currentpos)) {
+			trail.add(currentpos);
+			PlayerTrail.add(currentpos);
+		}
 	}
 
 	public ArrayList<Position> getTrail() {
@@ -57,7 +61,10 @@ public class Player implements ObserverInterface {
 	}
 
 	public void ResetTrail() {
-		this.trail.clear();
+		for (int i = 0; i < PlayerTrail.size(); i++) {
+			trail.remove(PlayerTrail.get(i));
+		}
+		this.PlayerTrail.clear();
 	}
 
 	public void move(char direction, Map PlayerMap) {
@@ -93,7 +100,7 @@ public class Player implements ObserverInterface {
 	}
 
 	public void Update(ArrayList<Position> t) {
-		this.trail = null;
+		// this.trail.clear();
 		this.trail = t;
 		// this.CurrentPosition = trail.get(trail.size()-1);
 	}
