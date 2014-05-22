@@ -25,7 +25,7 @@ public class MapCreatorTest {
           MapCreator creator1;
           @Test
           
-	public void creatorTestWithHazardousmap() {
+	/*public void creatorTestWithHazardousmap() {
             //Map.instance=null;
 		creator1 = new MapCreator();
 		m1 = creator1.createMap(2, 9);
@@ -33,8 +33,25 @@ public class MapCreatorTest {
 		
 		assertEquals(expresult, m1.size);
 		// assertEquals(true, g.generate());
+	}*/
+          @Before
+	public void setup() {
+		creator = new MapCreator();
+		m = creator.createMap(1, 5);
+		
+		//m.size = 5;
+                assertEquals(Map.size, m.size);
+		//assertEquals(true, g.setMapSize(5));
+		// assertEquals(true, g.generate());
 	}
+        
         @Test
+	public void generate() {
+		m.size = 5;
+		m = creator.createMap(2,5);
+		// assertEquals(true, m.generate());
+	}
+        /*@Test
 	public void creatorTestWithSafemap() {
 		creator = new MapCreator();
 		m = creator.createMap(1, 9);
@@ -42,7 +59,7 @@ public class MapCreatorTest {
 		//Map.instance=null;
 		assertEquals(expresult, m.size);
 		// assertEquals(true, g.generate());
-	}
+	}*/
         
 	/*Game game = null;
 	Map map = null;
