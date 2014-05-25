@@ -168,5 +168,18 @@ public class PlayerTest {
 		p.move('R', map);
 		assertEquals(3, p.getPosition().getX());
 	}
+        
+        @Test
+	public void TestUpdate() {
+		System.out.println("Update");
+                Player p=new Player(1);
+		Position position = new Position(2, 2, new Tile());
+		ArrayList<Position> t =new ArrayList<Position>();
+                t.add(position);
+                p.Update(t);
+                int res=p.getTrail().get(0).getX();
+		assertEquals(2,res);
+	}
+        
 
 }
