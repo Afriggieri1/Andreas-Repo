@@ -86,11 +86,15 @@ Map map=null;
             Player p3=new Player(3);
             Player p4= new Player(4);
             game.winners.add(p1);
-            game.winners.add(p2);
-            game.winners.add(p3);
-            game.winners.add(p4);
             int res=game.DisplayWinners();
             assertEquals(0,res);
+            game.winners.add(p2);
+            int res1=game.DisplayWinners();
+            assertEquals(0,res1);
+            game.winners.add(p3);
+            game.winners.add(p4);
+            int res3=game.DisplayWinners();
+            assertEquals(0,res3);
         }
         
          
