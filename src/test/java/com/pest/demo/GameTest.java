@@ -14,6 +14,12 @@ Map map=null;
 		game = new Game(2, 5,1,4);
                 map = SafeMap.getInstance(5);
 	}
+        
+        @Test
+	public void testAssignPlayersInTeams() {
+		game.AssignPlayersInTeams();
+                assertTrue(game.teams.get(0).getPlayers().size()!=0);
+	}
 
 	@Test
 	public void testWatertype() {
