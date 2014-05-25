@@ -48,10 +48,19 @@ Map map=null;
 	}
 	
 	@Test
-	public void testStartGame(){
-		
-	}
-        
+	public void testcheckTileForWater(){	
+            //Game game=new Game(16,2,1);
+           //Game g=new Game(7,2,1,0);
+           Tile t=new Tile();
+           t.setType('W');
+           Position p=new Position(1,2,t);
+           game.players.get(0).setPosition(p);
+           /*SafemapCreator sm=new SafemapCreator();
+           sm.createMap(5);*/
+           int result=game.checkTileForWater(0);
+           assertEquals(1,result);
+            
+        }
         
         
          
