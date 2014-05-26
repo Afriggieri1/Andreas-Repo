@@ -128,7 +128,7 @@ public class Game {
 		for (int i = 0; i < players.size(); i++) {
 			Player p = players.get(i);
 			int team_num = (int) (Math.random() * (NumOfTeams));
-			teams.get(team_num).AttachPlayer(p);
+			teams.get(team_num).AttachPlayer(p); 
 
 		}
 	}
