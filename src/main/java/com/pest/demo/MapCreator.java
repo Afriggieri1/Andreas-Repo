@@ -13,7 +13,7 @@ package com.pest.demo;
 public class MapCreator {
 	public Map createMap(int difficulty, int size) {
 		// Determine which creator to use
-		MapCreator creator = findCreatorForType(difficulty);
+		MapCreator creator = findCreatorForMode(difficulty);
 
 		if (creator != null)
 			return creator.createMap(size);
@@ -25,7 +25,7 @@ public class MapCreator {
 		return null; // create safe map
 	}
 
-	public MapCreator findCreatorForType(int difficulty) {
+	public MapCreator findCreatorForMode(int difficulty) {
 		if (difficulty == 1)
 			return new SafemapCreator();
 		else if (difficulty == 2)

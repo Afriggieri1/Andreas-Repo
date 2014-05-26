@@ -13,6 +13,6 @@ package com.pest.demo;
 public class SafemapCreator extends MapCreator {
 	public Map createMap(int size) {
 		Map map = SafeMap.getInstance(size);
-		return map;
+		return map; 
 	}
 }
